@@ -58,27 +58,11 @@ Se não encontrar o token, retornar erro informando o texto não reconhecido
         < ==, operador>
  
 */
-$entrada = "if (";
 
 // $entrada = str_split($entradaString); // array
 
 
 $Q = array('q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14');
-
-/**
- * FOR
- * IF
- * WHILE
- * PRINT
- * NUMERO  12345
- * OPERADOR ( + * - / {
- * ESPAÇO
- * 
- *  
- * 
- */
-$finais = array('q1' => 'Qualquer', 'q2' => 'IF', 'q3' => 'Qualquer', 'q4' => 'Número', 'q5' => 'Qualquer', 'q6' => 'Qualquer', 'q7' => 'FOR', 'q8' =>
-'Qualquer', 'q9' => 'Qualquer', 'q10' => 'Qualquer', 'q11' => 'Qualquer', 'q12' => 'WHILE');
 
 
 $finais = array(
@@ -137,16 +121,19 @@ $caracteresEspeciais =
 
 
 $estado = 'q0';
-
+$entrada = "if (";
 
 
 /**
- * do jeito q está ele ta lendo o "i" e já imprimindo como uma variavel
  * 
- * Fazer com que ele leia a palavra inteiro antes de um espaço, ou até mesmo, antes de um parenteses
+ * Fazer aceitar o espaço
  * 
- * arrumar o delta pra aceitar os especiais
- */
+ * colocar a função principal dentro de uma função
+ * com validcao, caso retornar false ele nao imprime o 'lista tokens"
+ * 
+ * imprimir os tokens de forma "bonita"
+ * 
+ *  */
 
 $tokens = [];
 
@@ -171,13 +158,16 @@ for ($i = 0; $i < strlen($entrada); $i++) {
             $tokens = [$entrada => $finais[$estado]];
             echo "<em><" . $finais[$estado] . ' , ' . $entrada . ">";
             $estado = 'q0';
-        } else {   //possivel erro
-            echo "Código inválido";
         }
-        echo "Lista tokens:";
-        var_dump($tokens);
+    } else {
+        echo "codigo invalido";
     }
 }
+
+echo "Lista tokens:";
+var_dump($tokens);
+ 
+
 
 
 
@@ -195,6 +185,7 @@ for ($i = 0; $i < strlen($entrada); $i++) {
             echo "Codigo Invalido";
             return false;
         }
+        return true;
     }
 
 ?>
