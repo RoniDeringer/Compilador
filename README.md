@@ -1,9 +1,9 @@
 # Compilador
-##Ajustes
+## Ajustes
 
 Fazer em forma de classe: uma pro fluxo principal, e a outra chamada token
 
-###Token
+### Token
 * vai ter uma funcao next que vai mostrar o carecter q ta lendo
 
 * Vai ter o:
@@ -14,4 +14,7 @@ Fazer em forma de classe: uma pro fluxo principal, e a outra chamada token
   * linha (biblioteca ver se tem)
   
   
+### Aula
+Tirar a validacao de carecter especial
+fazer de outro modo
   
