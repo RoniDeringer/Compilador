@@ -142,16 +142,18 @@ for ($i = 0; $i < strlen($entrada); $i++) {
 
         if($i == 0){
             if(!validaPrimeiraLetra($entrada[0], $caracteresEspeciais)){
-                break;
+                break;//colocar dentro de uma funcao a linha 140 e aqui retornar false
             }
         }
+
+        $estado = $delta[$estado][$entrada[$i]];
+/**
+ * ordem correta da linha de cima e baixo?
+ */
 
         validaCarecterEspecial($entrada, $i, $caracteresEspeciais);
 
 
-
-
-        $estado = $delta[$estado][$entrada[$i]];
 
 
         if (array_key_exists($estado, $finais)) {
@@ -172,7 +174,7 @@ var_dump($tokens);
 
 
     function validaCarecterEspecial($entrada, $i, $caracteresEspeciais)
-    {
+    { //nao ta aceitando o espaço como caracter especial e a logica ta errada, tem q esperar pra pegar primeiro o proximo estado
         if (array_key_exists($entrada[$i + 1], $caracteresEspeciais)) {
             $teste = $entrada[$i + 1];
             $tokens = [$entrada[$i] => "Variavel"];
