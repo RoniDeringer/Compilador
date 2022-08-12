@@ -4,30 +4,33 @@ namespace App\Controller;
 
 use App\Model\CompiladorModel;
 
-class CompiladorController{
 
-public function principal(){
-    for ($i = 0; $i < strlen($this->getEntrada()); $i++) {
-        if (array_key_exists($entrada[$i], $delta[$estado])) {
+class CompiladorController extends CompiladorModel{
+
+
+public function principal() {
+
+    for ($i = 0; $i < strlen($this->getEstado()); $i++) {
+        if (array_key_exists($this->getEntrada()[$i], $this->getDelta()[$this->getEstado()])) {
 
             
             if($i == 0){
-                if(!validaPrimeiraLetra($entrada[0], $caracteresEspeciais)){
+                if(!validaPrimeiraLetra($this->getEntrada()[0], $this->getCaracteresEspeciais())){
                     break;
                 }
             }
 
-            $estado = $delta[$estado][$entrada[$i]];
+            $estado = $this->getDelta()[$this->getEstado()][$this->getEntrada()[$i]];
 
-            validaCarecterEspecial($entrada, $i, $caracteresEspeciais);
-
-
+            validaCarecterEspecial($this->getEntrada(), $i, $this->getCaracteresEspeciais());
 
 
-            if (array_key_exists($estado, $finais)) {
-                $tokens = [$entrada => $finais[$estado]];
-                echo "<em><" . $finais[$estado] . ' , ' . $entrada . ">";
-                $estado = 'q0';
+
+
+            if (array_key_exists($this->getEstado(), $this->getFinais())) {
+                $tokens = [$this->getEntrada() => $this->getFinais()[$this->getEstado()]];
+                echo "<em><" . $this->getFinais()[$this->getEstado()] . ' , ' . $this->getEntrada() . ">";
+                $this->setEstado('q0');
             }
         } else {
             echo "codigo invalido";
@@ -39,13 +42,13 @@ public function principal(){
 
 
 
-function validaCarecterEspecial($entrada, $i, $caracteresEspeciais)
+function validaCarecterEspecial($entrada, $i)
 { //nao ta aceitando o espaço como caracter especial e a logica ta errada(??????), tem q esperar pra pegar primeiro o proximo estado
-    if (array_key_exists($entrada[$i + 1], $caracteresEspeciais)) {
+    if (array_key_exists($this->getEntrada()[$i + 1], $this->getCaracteresEspeciais())) {
 
-        $teste = $entrada[$i + 1];          
-        $tokens = [$entrada[$i] => "Variavel"];
-        $estado = 'q0';
+        $teste = $this->getEntrada()[$i + 1];          
+        $this->setToken([$this->getEntrada()[$i] => "Variavel"]);
+        $this->setEstado('q0');
     }
 }
 
@@ -65,4 +68,3 @@ function validaPrimeiraLetra($primeiraLetra, ){
 
 
 
-}

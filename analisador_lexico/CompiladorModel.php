@@ -105,7 +105,7 @@ public function getEstado(){
     return $this->estado;
 }   
 
-public function setEstado(array $estado){
+public function setEstado(String $estado){
     return $this->estado = $estado;    
 }
 
