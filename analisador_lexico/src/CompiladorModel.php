@@ -3,7 +3,12 @@
 /**
  * @author Roni Deringer
  */
-namespace App\Model;
+namespace src\Model;
+
+use src\Controller\CompiladorController;
+
+$teste = new CompiladorModel;
+
 
 class CompiladorModel{
 
