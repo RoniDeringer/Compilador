@@ -1,8 +1,6 @@
 # Compilador
 ## Ajustes
-
-Fazer em forma de classe: uma pro fluxo principal, e a outra chamada token
-
+fazer uma classe token
 ### Token
 * vai ter uma funcao next que vai mostrar o carecter q ta lendo
 
@@ -18,3 +16,6 @@ Fazer em forma de classe: uma pro fluxo principal, e a outra chamada token
 Tirar a validacao de carecter especial
 fazer de outro modo
   
+### Conceitos
+
+`backtracking` (retrocesso): Voltar atrás no reconhecimento fazendo repetidas tentativas

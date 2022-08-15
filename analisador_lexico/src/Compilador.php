@@ -76,6 +76,7 @@ class Compilador
 
     private $token;
 
+    private $lexema;
 
 
 
@@ -85,6 +86,32 @@ class Compilador
         $this->setEntrada($entrada);
         $this->principal();
     }
+
+
+    public function principal2()
+    {
+        $i = 'q0';
+        while ($i < strlen($this->getEntrada())) {
+            try {
+                $this->setEstado($this->DELTA[$this->getEstado()][$this->getEntrada()[$i]]);
+                $this->setLexema($this->getLexema() + $this->getEntrada()[$i]);
+                $i++;
+            } catch (Exception $e) {
+                if (array_key_exists($this->getEstado(), $this->ESTADOS_FINAIS)) {
+                    //lista_tokens.append({finais[estado]:lexema})
+                    $this->setEstado('q0');
+                    $this->setLexema('');
+                } else {
+                    echo "erro";
+                    throw new Exception('Divisão por zero.', $this->getEntrada());
+                    break;
+                }
+            }
+        }
+    }
+
+
+
 
     public function principal()
     {
@@ -162,7 +189,7 @@ class Compilador
         return $this->entrada = $entrada;
     }
 
-    public function getToken(array $token)
+    public function getToken()
     {
         return $this->token;
     }
@@ -170,5 +197,15 @@ class Compilador
     public function setToken(array $token)
     {
         return $this->token = $token;
+    }
+
+    public function getLexema()
+    {
+        return $this->lexema;
+    }
+
+    public function setLexema($lexema)
+    {
+        return $this->lexema = $lexema;
     }
 }
