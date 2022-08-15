@@ -4,9 +4,13 @@
  * @author Roni Deringer
  */
 
-namespace src\Model;
+namespace src;
 
-class CompiladorModel
+
+$teste = new Compilador('entrada');
+
+
+class Compilador
 {
 
     const ESTADOS = array('q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14');
@@ -35,7 +39,7 @@ class CompiladorModel
 
     const DELTA = array(
 
-        'q0' => array('a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'f' => 'q5', 'g' => 'q3', 'h' => 'q3', 'i' => 'q1', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q8', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', 'u' => 'q3', 'v' => 'q3', 'w' => 'q8', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q4', '1' => 'q4', '2' => 'q4', '3' => 'q4', '4' => 'q4', '5' => 'q4', '6' => 'q4', '7' => 'q4', '8' => 'q4', '9' => 'q4', '(' => 'q14', ')' => 'q15', '{' => 'q16', '}' => 'q17', '[' => 'q18', ']' => 'q19', '+' => 'q20', '-' => 'q21', '/' => 'q22', '*' => 'q23', '=' => 'q24', '!' => 'q25', '>' => 'q26', '<' => 'q27'),
+        'q0' => array('a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'f' => 'q5', 'g' => 'q3', 'h' => 'q3', 'i' => 'q1', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q8', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', '' => 'q3', 'v' => 'q3', 'w' => 'q8', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q4', '1' => 'q4', '2' => 'q4', '3' => 'q4', '4' => 'q4', '5' => 'q4', '6' => 'q4', '7' => 'q4', '8' => 'q4', '9' => 'q4', '(' => 'q14', ')' => 'q15', '{' => 'q16', '}' => 'q17', '[' => 'q18', ']' => 'q19', '+' => 'q20', '-' => 'q21', '/' => 'q22', '*' => 'q23', '=' => 'q24', '!' => 'q25', '>' => 'q26', '<' => 'q27'),
         'q1' => array('f' => 'q2', 'a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'g' => 'q3', 'h' => 'q3', 'i' => 'q3', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q3', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', 'u' => 'q3', 'v' => 'q3', 'w' => 'q3', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q3', '1' => 'q3', '2' => 'q3', '3' => 'q3', '4' => 'q3', '5' => 'q3', '6' => 'q3', '7' => 'q3', '8' => 'q3', '9' => 'q3'),
         'q2' => array('a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'f' => 'q3', 'g' => 'q3', 'h' => 'q3', 'i' => 'q3', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q3', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', 'u' => 'q3', 'v' => 'q3', 'w' => 'q3', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q3', '1' => 'q3', '2' => 'q3', '3' => 'q3', '4' => 'q3', '5' => 'q3', '6' => 'q3', '7' => 'q3', '8' => 'q3', '9' => 'q3'),
         'q3' => array('a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'f' => 'q3', 'g' => 'q3', 'h' => 'q3', 'i' => 'q3', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q3', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', 'u' => 'q3', 'v' => 'q3', 'w' => 'q3', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q3', '1' => 'q3', '2' => 'q3', '3' => 'q3', '4' => 'q3', '5' => 'q3', '6' => 'q3', '7' => 'q3', '8' => 'q3', '9' => 'q3', '(' => 'q14', ')' => 'q15', '{' => 'q16', '}' => 'q17', '[' => 'q18', ']' => 'q19', '+' => 'q20', '-' => 'q21', '/' => 'q22', '*' => 'q23', '=' => 'q24', '!' => 'q25', '>' => 'q26', '<' => 'q27'),
@@ -76,34 +80,35 @@ class CompiladorModel
 
 
 
-    public function __construct($entrada, $modelo)
+    public function __construct($entrada)
     {
-        $modelo->setEntrada($entrada);
+        $this->setEntrada($entrada);
+        $this->principal();
     }
 
-    public function principal($modelo)
+    public function principal()
     {
 
-        for ($i = 0; $i < strlen($modelo->getEstado()); $i++) {
-            if (array_key_exists($modelo->getEntrada()[$i], $modelo->delta[$modelo->getEstado()])) {
+        for ($i = 0; $i < strlen($this->getEstado()); $i++) {
+            if (array_key_exists($this->getEntrada()[$i], $this->delta[$this->getEstado()])) {
 
 
                 if ($i == 0) {
-                    if (!validaPrimeiraLetra($modelo->getEntrada()[0], $modelo)) {
+                    if (!$this->validaPrimeiraLetra($this->getEntrada()[0])) {
                         break;
                     }
                 }
-                var_dump($modelo->ESTADOS_FINAIS);
+                var_dump($this->ESTADOS_FINAIS);
 
-                $estado = $modelo->finais[$modelo->getEstado()][$modelo->getEntrada()[$i]];
+                $estado = $this->finais[$this->getEstado()][$this->getEntrada()[$i]];
 
-                validaCarecterEspecial($modelo->getEntrada(), $i, $modelo);
+                $this->validaCarecterEspecial($this->getEntrada(), $i);
 
 
-                if (array_key_exists($modelo->getEstado(), $modelo->ESTADOS_FINAIS)) {
-                    $tokens = [$modelo->getEntrada() => $modelo->ESTADOS_FINAIS[$modelo->ESTADOS]];
-                    echo "<em><" . $modelo->ESTADOS_FINAIS[$modelo->getEstado()] . ' , ' . $modelo->getEntrada() . ">";
-                    $modelo->setEstado('q0');
+                if (array_key_exists($this->getEstado(), $this->ESTADOS_FINAIS)) {
+                    $tokens = [$this->getEntrada() => $this->ESTADOS_FINAIS[$this->ESTADOS]];
+                    echo "<em><" . $this->ESTADOS_FINAIS[$this->getEstado()] . ' , ' . $this->getEntrada() . ">";
+                    $this->setEstado('q0');
                 }
             } else {
                 echo "codigo invalido";
@@ -112,42 +117,24 @@ class CompiladorModel
     } //fim function principal
 
 
-    function validaPrimeiraLetra($primeiraLetra, $modelo)
+    function validaPrimeiraLetra($primeiraLetra)
     {
-        if (array_key_exists($primeiraLetra, $modelo->CARECTERES_ESPECIAIS)) {
+        if (array_key_exists($primeiraLetra, $this->CARECTERES_ESPECIAIS)) {
             echo "Codigo Invalido";
             return false;
         }
         return true;
     }
 
-    function validaCarecterEspecial($entrada, $i, $modelo)
+    function validaCarecterEspecial($entrada, $i)
     { //nao ta aceitando o espaço como caracter especial e a logica ta errada(??????), tem q esperar pra pegar primeiro o proximo estado
-        if (array_key_exists($modelo->getEntrada()[$i + 1], $modelo->CARECTERES_ESPECIAIS)) {
+        if (array_key_exists($this->getEntrada()[$i + 1], $this->CARECTERES_ESPECIAIS)) {
 
-            $teste = $modelo->getEntrada()[$i + 1];
-            $modelo->setToken([$modelo->getEntrada()[$i] => "Variavel"]);
-            $modelo->setEstado('q0');
+            $teste = $this->getEntrada()[$i + 1];
+            $this->setToken([$this->getEntrada()[$i] => "Variavel"]);
+            $this->setEstado('q0');
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
