@@ -19,3 +19,5 @@ fazer de outro modo
 ### Conceitos
 
 `backtracking` (retrocesso): Voltar atrás no reconhecimento fazendo repetidas tentativas
+
+`lexema` o conjunto que forma a palavra
