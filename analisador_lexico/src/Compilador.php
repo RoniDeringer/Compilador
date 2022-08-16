@@ -7,15 +7,15 @@
 namespace src;
 
 
-$teste = new Compilador('entrada');
+$teste = new Compilador('kl');
 
 
 class Compilador
 {
 
-    const ESTADOS = array('q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14');
+    public static $ESTADOS = array('q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14');
 
-    const ESTADOS_FINAIS = array(
+    public static $ESTADOS_FINAIS = array(
         'q2' => 'IF',
         'q4' => 'Número',
         'q7' => 'FOR',
@@ -37,7 +37,7 @@ class Compilador
         'q27' => '<',
     );
 
-    const DELTA = array(
+   public static $DELTA = array(
 
         'q0' => array('a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'f' => 'q5', 'g' => 'q3', 'h' => 'q3', 'i' => 'q1', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q8', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', '' => 'q3', 'v' => 'q3', 'w' => 'q8', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q4', '1' => 'q4', '2' => 'q4', '3' => 'q4', '4' => 'q4', '5' => 'q4', '6' => 'q4', '7' => 'q4', '8' => 'q4', '9' => 'q4', '(' => 'q14', ')' => 'q15', '{' => 'q16', '}' => 'q17', '[' => 'q18', ']' => 'q19', '+' => 'q20', '-' => 'q21', '/' => 'q22', '*' => 'q23', '=' => 'q24', '!' => 'q25', '>' => 'q26', '<' => 'q27'),
         'q1' => array('f' => 'q2', 'a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'g' => 'q3', 'h' => 'q3', 'i' => 'q3', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q3', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', 'u' => 'q3', 'v' => 'q3', 'w' => 'q3', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q3', '1' => 'q3', '2' => 'q3', '3' => 'q3', '4' => 'q3', '5' => 'q3', '6' => 'q3', '7' => 'q3', '8' => 'q3', '9' => 'q3'),
@@ -55,7 +55,7 @@ class Compilador
 
     );
 
-    const CARACTERES_ESPECIAIS =
+    public static $CARACTERES_ESPECIAIS =
     [
         'parenteses_aberto' => '(',
         'parenteses_fechado' => ')',
@@ -80,34 +80,93 @@ class Compilador
 
 
 
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(string $estado)
+    {
+        return $this->estado = $estado;
+    }
+
+    public function getEntrada()
+    {
+        return $this->entrada;
+    }
+
+    public function setEntrada(string $entrada)
+    {
+        return $this->entrada = $entrada;
+    }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken(array $token)
+    {
+        return $this->token = $token;
+    }
+
+    public function getLexema()
+    {
+        return $this->lexema;
+    }
+
+    public function setLexema($lexema)
+    {
+        return $this->lexema = $lexema;
+    }
+
+
+
+
 
     public function __construct($entrada)
     {
         $this->setEntrada($entrada);
-        $this->principal();
+        $this->principal2();
+        $this->printTokens();
     }
 
 
     public function principal2()
     {
-        $i = 'q0';
+        $i = 0; 
         while ($i < strlen($this->getEntrada())) {
             try {
-                $this->setEstado($this->DELTA[$this->getEstado()][$this->getEntrada()[$i]]);
-                $this->setLexema($this->getLexema() + $this->getEntrada()[$i]);
+                 $e = self::$DELTA[$this->getEstado()][$this->getEntrada()[$i]] ;
+                $this->setEstado($e);
+                   
+                $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
                 $i++;
-            } catch (Exception $e) {
-                if (array_key_exists($this->getEstado(), $this->ESTADOS_FINAIS)) {
-                    //lista_tokens.append({finais[estado]:lexema})
+
+            } catch (Exception $e) { //VER AQUI SE TA CAINDO
+                if (array_key_exists($this->getEstado(), self::$ESTADOS_FINAIS)) {
+                 
+                 
+                    $this->setToken(array(self::$ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema()));
+
                     $this->setEstado('q0');
                     $this->setLexema('');
+                    
                 } else {
+
+                    //NAO TA CAINDO AQUI QUANDO FOR ESPAÇO
+
                     echo "erro";
-                    throw new Exception('Divisão por zero.', $this->getEntrada());
+                    throw new Exception('Divisão por zero.');
                     break;
                 }
             }
         }
+    }
+    public function printTokens(){
+        // foreach ($this->getToken() as $token){
+            var_dump($this->getToken());
+        // }
     }
 
 
@@ -117,7 +176,7 @@ class Compilador
     {
 
         for ($i = 0; $i < strlen($this->getEstado()); $i++) {
-            if (array_key_exists($this->getEntrada()[$i], $this->delta[$this->getEstado()])) {
+            if (array_key_exists($this->getEntrada()[$i], self::$DELTA[$this->getEstado()])) {
 
 
                 if ($i == 0) {
@@ -161,51 +220,5 @@ class Compilador
             $this->setToken([$this->getEntrada()[$i] => "Variavel"]);
             $this->setEstado('q0');
         }
-    }
-
-
-
-
-
-
-
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-
-    public function setEstado(String $estado)
-    {
-        return $this->estado = $estado;
-    }
-
-    public function getEntrada()
-    {
-        return $this->entrada;
-    }
-
-    public function setEntrada(array $entrada)
-    {
-        return $this->entrada = $entrada;
-    }
-
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    public function setToken(array $token)
-    {
-        return $this->token = $token;
-    }
-
-    public function getLexema()
-    {
-        return $this->lexema;
-    }
-
-    public function setLexema($lexema)
-    {
-        return $this->lexema = $lexema;
     }
 }
