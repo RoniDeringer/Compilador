@@ -135,19 +135,33 @@ class Compilador
 
     public function principal2()
     {
+        $tokenAtual = [];
+        $listTokens = [];
         $i = 0; 
-        while ($i < strlen($this->getEntrada())) {
+        while ($i-1 < strlen($this->getEntrada())) {
                 $lendo = $this->getEntrada()[$i];
-                $proximo_estado = self::$DELTA[$this->getEstado()][$this->getEntrada()[$i]] ;
-                $i++;
-                if (!$proximo_estado){
+                
+                $proximo_estado = self::$DELTA[$this->getEstado()][$this->getEntrada()[$i]] ?: '';
+
+
+                if ($proximo_estado){
                     $this->setEstado($proximo_estado); //$proximo_estado = null nao cai no catch
                     $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
+                    $i++;
+
                 }else{
                     if (array_key_exists($this->getEstado(), self::$ESTADOS_FINAIS)) {
-                        $this->setToken(array(self::$ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema()));
-                        $this->setEstado('q0');
-                        $this->setLexema('');
+                        
+                        $tokenAtual = array(self::$ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema());
+                        array_push($listTokens, $tokenAtual );
+                        /*
+                        foreach ($token_atual as $key => $value){
+                            $teste[$key] = $value;
+                        }
+                        */
+                        $this->setToken($listTokens);
+                        $this->setEstado('q0'); //token sobreescrevendo
+                        $this->setLexema('');//nao lendo a ultima posicao
                         
                     } else {
                         echo "Código inválido!";
