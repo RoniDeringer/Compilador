@@ -137,26 +137,23 @@ class Compilador
     {
         $i = 0; 
         while ($i < strlen($this->getEntrada())) {
-            try {
                 $lendo = $this->getEntrada()[$i];
                 $proximo_estado = self::$DELTA[$this->getEstado()][$this->getEntrada()[$i]] ;
-                $this->setEstado($proximo_estado); //$e = null nao cai no catch
-                $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
                 $i++;
-
-            } catch (Exception $e) { //VER AQUI SE TA CAINDO
-          
-                if (array_key_exists($this->getEstado(), self::$ESTADOS_FINAIS)) {
-                    $this->setToken(array(self::$ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema()));
-                    $this->setEstado('q0');
-                    $this->setLexema('');
-                    
-                } else {
-                    echo "erro";
-                    throw new Exception('Divisão por zero.');
-                    break;
+                if (!$proximo_estado){
+                    $this->setEstado($proximo_estado); //$proximo_estado = null nao cai no catch
+                    $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
+                }else{
+                    if (array_key_exists($this->getEstado(), self::$ESTADOS_FINAIS)) {
+                        $this->setToken(array(self::$ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema()));
+                        $this->setEstado('q0');
+                        $this->setLexema('');
+                        
+                    } else {
+                        echo "Código inválido!";
+                        break;
+                    }
                 }
-            }
         }
     }
     public function printTokens(){
