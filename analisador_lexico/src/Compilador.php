@@ -13,9 +13,9 @@ $teste = new Compilador('if if');
 class Compilador
 {
 
-    public static $ESTADOS = array('q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14');
+    const ESTADOS = array('q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14');
 
-    public static $ESTADOS_FINAIS = array(
+    const ESTADOS_FINAIS = array(
         'q2' => 'IF',
         'q3' => 'VARIAVEL',
         'q4' => 'Número',
@@ -39,7 +39,7 @@ class Compilador
         'q28' => 'ESPAÇO',
     );
 
-   public static $DELTA = array(
+   const DELTA = array(
 
         'q0' => array('a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'f' => 'q5', 'g' => 'q3', 'h' => 'q3', 'i' => 'q1', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q8', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', '' => 'q3', 'v' => 'q3', 'w' => 'q8', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q4', '1' => 'q4', '2' => 'q4', '3' => 'q4', '4' => 'q4', '5' => 'q4', '6' => 'q4', '7' => 'q4', '8' => 'q4', '9' => 'q4', '(' => 'q14', ')' => 'q15', '{' => 'q16', '}' => 'q17', '[' => 'q18', ']' => 'q19', '+' => 'q20', '-' => 'q21', '/' => 'q22', '*' => 'q23', '=' => 'q24', '!' => 'q25', '>' => 'q26', '<' => 'q27', ' ' => 'q28'),
         'q1' => array('f' => 'q2', 'a' => 'q3', 'b' => 'q3', 'c' => 'q3', 'd' => 'q3', 'e' => 'q3', 'g' => 'q3', 'h' => 'q3', 'i' => 'q3', 'j' => 'q3', 'k' => 'q3', 'l' => 'q3', 'm' => 'q3', 'n' => 'q3', 'o' => 'q3', 'p' => 'q3', 'q' => 'q3', 'r' => 'q3', 's' => 'q3', 't' => 'q3', 'u' => 'q3', 'v' => 'q3', 'w' => 'q3', 'x' => 'q3', 'y' => 'q3', 'z' => 'q3', '0' => 'q3', '1' => 'q3', '2' => 'q3', '3' => 'q3', '4' => 'q3', '5' => 'q3', '6' => 'q3', '7' => 'q3', '8' => 'q3', '9' => 'q3'),
@@ -57,7 +57,7 @@ class Compilador
 
     );
 
-    public static $CARACTERES_ESPECIAIS =
+    const CARACTERES_ESPECIAIS =
     [
         'parenteses_aberto' => '(',
         'parenteses_fechado' => ')',
@@ -74,11 +74,11 @@ class Compilador
 
     private $estado = 'q0';
 
-    private $entrada;
+    private $entrada = '';
 
-    private $token;
+    private $token = '';
 
-    private $lexema;
+    private $lexema = '';
 
 
 
@@ -139,20 +139,21 @@ class Compilador
         $listTokens = [];
         $i = 0; 
         while ($i-1 < strlen($this->getEntrada())) {
-                $lendo = $this->getEntrada()[$i];
+                // $lendo = $this->getEntrada()[$i];
                 
-                $proximo_estado = self::$DELTA[$this->getEstado()][$this->getEntrada()[$i]] ?: '';
+                if(isset(Compilador::DELTA[$this->getEstado()][$this->getEntrada()[$i]])){
+                    
+                    $proximo_estado = Compilador::DELTA[$this->getEstado()][$this->getEntrada()[$i]] ?: '';
 
 
-                if ($proximo_estado){
                     $this->setEstado($proximo_estado); //$proximo_estado = null nao cai no catch
                     $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
                     $i++;
 
                 }else{
-                    if (array_key_exists($this->getEstado(), self::$ESTADOS_FINAIS)) {
+                    if (array_key_exists($this->getEstado(), Compilador::ESTADOS_FINAIS)) {
                         
-                        $tokenAtual = array(self::$ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema());
+                        $tokenAtual = array(Compilador::ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema());
                         array_push($listTokens, $tokenAtual );
                         /*
                         foreach ($token_atual as $key => $value){
@@ -172,7 +173,7 @@ class Compilador
     }
     public function printTokens(){
         // foreach ($this->getToken() as $token){
-            var_dump($this->getToken());
+             return var_dump($this->getToken());
         // }
     }
 
@@ -183,7 +184,7 @@ class Compilador
     {
 
         for ($i = 0; $i < strlen($this->getEstado()); $i++) {
-            if (array_key_exists($this->getEntrada()[$i], self::$DELTA[$this->getEstado()])) {
+            if (array_key_exists($this->getEntrada()[$i], Compilador::DELTA[$this->getEstado()])) {
 
 
                 if ($i == 0) {
