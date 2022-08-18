@@ -7,7 +7,7 @@
 namespace src;
 
 
-$teste = new Compilador('if if');
+$teste = new Compilador('( 123+123 ]');
 
 
 class Compilador
@@ -22,20 +22,20 @@ class Compilador
         'q7' => 'FOR',
         'q12' => 'WHILE',
         'q13' => 'PRINT',
-        'q14' => '(',
-        'q15' => ')',
-        'q16' => '{',
-        'q17' => '}',
-        'q18' => '[',
-        'q19' => ']',
-        'q20' => '+',
-        'q21' => '-',
-        'q22' => '/',
-        'q23' => '*',
-        'q24' => '=',
-        'q25' => '!',
-        'q26' => '>',
-        'q27' => '<',
+        'q14' => 'abre_parenteses',
+        'q15' => 'fecha_parenteses',
+        'q16' => 'abre_chave',
+        'q17' => 'fecha_chave',
+        'q18' => 'abre_conhete',
+        'q19' => 'fecha_conhete',
+        'q20' => 'adição',
+        'q21' => 'subtração',
+        'q22' => 'divisão',
+        'q23' => 'multiplicação',
+        'q24' => 'igual',
+        'q25' => 'diferente',
+        'q26' => 'maior',
+        'q27' => 'manor',
         'q28' => 'ESPAÇO',
     );
 
@@ -76,7 +76,7 @@ class Compilador
 
     private $entrada = '';
 
-    private $token = '';
+    private $token = [];
 
     private $lexema = '';
 
@@ -123,9 +123,6 @@ class Compilador
     }
 
 
-
-
-
     public function __construct($entrada)
     {
         $this->setEntrada($entrada);
@@ -139,94 +136,47 @@ class Compilador
         $listTokens = [];
         $i = 0; 
         while ($i-1 < strlen($this->getEntrada())) {
-                // $lendo = $this->getEntrada()[$i];
+            // $lendo = $this->getEntrada()[$i];
+            
+            if(isset(Compilador::DELTA[$this->getEstado()][$this->getEntrada()[$i]])){
                 
-                if(isset(Compilador::DELTA[$this->getEstado()][$this->getEntrada()[$i]])){
+                $proximo_estado = Compilador::DELTA[$this->getEstado()][$this->getEntrada()[$i]] ?: '';
+
+
+                $this->setEstado($proximo_estado); //$proximo_estado = null nao cai no catch
+                $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
+                $i++;
+
+            }else{
+                if (array_key_exists($this->getEstado(), Compilador::ESTADOS_FINAIS)) {
                     
-                    $proximo_estado = Compilador::DELTA[$this->getEstado()][$this->getEntrada()[$i]] ?: '';
-
-
-                    $this->setEstado($proximo_estado); //$proximo_estado = null nao cai no catch
-                    $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
-                    $i++;
-
-                }else{
-                    if (array_key_exists($this->getEstado(), Compilador::ESTADOS_FINAIS)) {
-                        
-                        $tokenAtual = array(Compilador::ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema());
-                        array_push($listTokens, $tokenAtual );
-                        /*
-                        foreach ($token_atual as $key => $value){
-                            $teste[$key] = $value;
-                        }
-                        */
-                        $this->setToken($listTokens);
-                        $this->setEstado('q0'); //token sobreescrevendo
-                        $this->setLexema('');//nao lendo a ultima posicao
-                        
-                    } else {
-                        echo "Código inválido!";
-                        break;
+                    $tokenAtual = array(Compilador::ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema());
+                    array_push($listTokens, $tokenAtual );
+                    /*
+                    foreach ($token_atual as $key => $value){
+                        $teste[$key] = $value;
                     }
-                }
-        }
-    }
-    public function printTokens(){
-        // foreach ($this->getToken() as $token){
-             return var_dump($this->getToken());
-        // }
-    }
-
-
-
-
-    public function principal()
-    {
-
-        for ($i = 0; $i < strlen($this->getEstado()); $i++) {
-            if (array_key_exists($this->getEntrada()[$i], Compilador::DELTA[$this->getEstado()])) {
-
-
-                if ($i == 0) {
-                    if (!$this->validaPrimeiraLetra($this->getEntrada()[0])) {
-                        break;
-                    }
-                }
-                var_dump($this->ESTADOS_FINAIS);
-
-                $estado = $this->finais[$this->getEstado()][$this->getEntrada()[$i]];
-
-                $this->validaCarecterEspecial($this->getEntrada(), $i);
-
-
-                if (array_key_exists($this->getEstado(), $this->ESTADOS_FINAIS)) {
-                    $tokens = [$this->getEntrada() => $this->ESTADOS_FINAIS[$this->ESTADOS]];
-                    echo "<em><" . $this->ESTADOS_FINAIS[$this->getEstado()] . ' , ' . $this->getEntrada() . ">";
+                    */
+                    $this->setToken($listTokens);
                     $this->setEstado('q0');
+                    $this->setLexema('');
+                    
+                } else {
+                    echo "Código inválido!";
+                    break;
                 }
-            } else {
-                echo "codigo invalido";
             }
         }
-    } //fim function principal
-
-
-    function validaPrimeiraLetra($primeiraLetra)
-    {
-        if (array_key_exists($primeiraLetra, $this->CARECTERES_ESPECIAIS)) {
-            echo "Codigo Invalido";
-            return false;
-        }
-        return true;
     }
-
-    function validaCarecterEspecial($entrada, $i)
-    { //nao ta aceitando o espaço como caracter especial e a logica ta errada(??????), tem q esperar pra pegar primeiro o proximo estado
-        if (array_key_exists($this->getEntrada()[$i + 1], $this->CARECTERES_ESPECIAIS)) {
-
-            $teste = $this->getEntrada()[$i + 1];
-            $this->setToken([$this->getEntrada()[$i] => "Variavel"]);
-            $this->setEstado('q0');
+    
+    public function printTokens(){
+        foreach ($this->getToken() as $token){
+            foreach ($token as $key => $value){
+                echo('[ '.$key.' ]');
+                echo(' : ');
+                echo('[ '.$value.' ]');
+                echo('<br>');
+            }   
         }
     }
 }
