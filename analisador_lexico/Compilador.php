@@ -4,13 +4,8 @@
  * @author Roni Deringer
  */
 
-namespace src;
-
-
-$teste = new Compilador('( 123+123 ]');
-
-
-class Compilador
+// $teste = new Compilador('a+');
+ class Compilador
 {
 
     const ESTADOS = array('q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14');
@@ -126,8 +121,6 @@ class Compilador
     public function __construct($entrada)
     {
         $this->setEntrada($entrada);
-        $this->principal();
-        $this->printTokens();
     }
 
 /**
@@ -135,6 +128,7 @@ class Compilador
  *  1- Remover warnings
  *  2- Usar Regex
  *  3- Melhorar o visual
+ *  4- 'a+'  considerando só +
  */
 
     public function principal()
@@ -143,13 +137,10 @@ class Compilador
         $listTokens = [];
         $i = 0; 
         while ($i-1 < strlen($this->getEntrada())) {
-            // $lendo = $this->getEntrada()[$i];
+            $lendo = $this->getEntrada()[$i];
             
             if(isset(Compilador::DELTA[$this->getEstado()][$this->getEntrada()[$i]])){
-                
                 $proximo_estado = Compilador::DELTA[$this->getEstado()][$this->getEntrada()[$i]] ?: '';
-
-
                 $this->setEstado($proximo_estado); //$proximo_estado = null nao cai no catch
                 $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
                 $i++;
@@ -170,20 +161,9 @@ class Compilador
                     
                 } else {
                     echo "Código inválido!";
-                    break;
+                    return true;
                 }
             }
-        }
-    }
-    
-    public function printTokens(){
-        foreach ($this->getToken() as $token){
-            foreach ($token as $key => $value){
-                echo('[ '.$key.' ]');
-                echo(' : ');
-                echo('[ '.$value.' ]');
-                echo('<br>');
-            }   
         }
     }
 }
