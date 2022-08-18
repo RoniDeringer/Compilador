@@ -14,7 +14,7 @@ echo '<h1>Análise léxica</h1>';
         <pre>
             <form action="" method="post">
                 <label for="entrada">somente letras minisculas!</label>
-                <textarea  name="entrada" id="entrada" rows="8"></textarea>
+                <textarea  name="entrada" id="entrada" rows="10" cols="50"></textarea>
                 <input type="submit" value="enviar">
             </form>
         </pre>
@@ -23,18 +23,18 @@ echo '<h1>Análise léxica</h1>';
             require_once('Compilador.php');
             $entrada = $_POST["entrada"];
             $teste = new Compilador($entrada);
-        }
+        
     ?>
     <pre>
         <?php
             if(!$teste->principal()){ 
         ?>
         
-            <table border="1">
+            <table border="1px">
                     
                 <tr>
-                    <th>token</th>
-                    <th>lexema</th>
+                    <th>TOKEN</th>
+                    <th>LEXEMA</th>
                 </tr>
                     
                 <?php
@@ -42,14 +42,14 @@ echo '<h1>Análise léxica</h1>';
                         foreach ($token as $key => $value){
                             ?>
                             <tr>
-                                <td> <?php echo('[ '.$key.' ]');  ?> </td>
-                                <td> <?php echo('[ '.$value.' ]');?> </td>
-                                <br>
+                                <td><x>[ </x> <?php echo $key;  ?><x> ]</x> </td>
+                                <td><x>[ </x> <?php echo $value;?><x> ]</x> </td>
                             </tr><?php
                         }
                     }
                     ?></table><?php
-                }
+            }
+        }    
                 ?>
             
     </pre>
