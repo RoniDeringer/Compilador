@@ -126,11 +126,18 @@ class Compilador
     public function __construct($entrada)
     {
         $this->setEntrada($entrada);
-        $this->principal2();
+        $this->principal();
         $this->printTokens();
     }
 
-    public function principal2()
+/**
+ * FAZER AJUSTES:
+ *  1- Remover warnings
+ *  2- Usar Regex
+ *  3- Melhorar o visual
+ */
+
+    public function principal()
     {
         $tokenAtual = [];
         $listTokens = [];
