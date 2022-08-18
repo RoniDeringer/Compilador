@@ -1,23 +1,28 @@
-# Compilador
-## Ajustes
-fazer uma classe token
-### Token
-* vai ter uma funcao next que vai mostrar o carecter q ta lendo
+# 🚀 Compilador
+Trabalho realizado na disciplina de Compiladores no curso de Ciências da computação.
+Professora orientadora: Marcela Leite.
 
-* Vai ter o:
-  * Lexema: o que foi enviado. ex: (
-  * token: o que é. ex: parenteses
-  * pos. inicial
-  * pos. final
-  * linha (biblioteca ver se tem)
-  
-  
-### Aula
-Tirar a validacao de carecter especial
-fazer de outro modo
-  
-### Conceitos
+Esse trabalho será divido em fases, segue as fases: 
+## 📌 [Analise Léxica](https://github.com/RoniDeringer/Compilador/tree/master/analisador_lexico)
+Objetivo é identificar e classificar as "palavras" em uma sentença.<br>
+*Obs:* A função principal da análise léxica é criar uma lista de `tokens` que são essas palavras.<br>
+`Lexema` é uma sequência de caracteres reconhecidos por um padrão<br>
 
-`backtracking` (retrocesso): Voltar atrás no reconhecimento fazendo repetidas tentativas
+* Conceitos de forma simples
+  * Lexema: o que foi enviado. ex: nomepessoa
+  * token: o que é. ex: váriavel
+  * Token: pode ser o conjunto todo também. ex: < lexema, token >
 
-`lexema` o conjunto que forma a palavra
+___
+#### 📌 Análise Sintática
+
+#### 📌 Análise Sintática
+
+#### 📌 Análise Semântica
+
+#### 📌 Gerador de código Intermediário
+
+#### 📌 Otimizador de código
+
+#### 📌 Gerador de código objeto
+
