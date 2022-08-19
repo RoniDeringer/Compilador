@@ -30,17 +30,15 @@ entrada{
   font-style: italic;
   color: aqua;  
 }
-teste{
-  font-size: 10px;
-  font-style: bold;
-  background-color: #a3a3a3;
-  color: #458688;
+
+table, th, td {
+  font-size: 20px;
+  margin:0em 10em;
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+x{
+  color: #A9A9A9;
 }
 
-teste1{
-  font-size: 10px;
-  font-style: bold;
-  background-color: #a3a3a3;
-  color: #458688;
-}
 </style>
