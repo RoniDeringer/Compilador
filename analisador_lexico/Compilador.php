@@ -2,8 +2,8 @@
 
 namespace src;
 
-// ini_set('display_errors', 0);
-// error_reporting(E_ERROR | E_WARNING | E_PARSE);
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 /**
  * @author Roni Deringer
