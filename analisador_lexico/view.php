@@ -19,16 +19,16 @@ echo '<h1>Análise léxica</h1>';
             </form>
         </pre>
     <?php
-        if (isset($_POST["entrada"])) {
-            require_once('Compilador.php');
-            $entrada = $_POST["entrada"];
-            $teste = new Compilador($entrada);
+    if (isset($_POST["entrada"])) {
+        require_once('Compilador.php');
+        $entrada = $_POST["entrada"];
+        $teste = new src\Compilador($entrada);
 
-    ?>
+        ?>
     <pre>
         <?php
-            if(!$teste->principal()){
-        ?>
+        if (!$teste->principal()) {
+            ?>
 
             <table border="1px">
 
@@ -37,20 +37,20 @@ echo '<h1>Análise léxica</h1>';
                     <th>LEXEMA</th>
                 </tr>
 
-                <?php
-                    foreach ($teste->getToken() as $token){
-                        foreach ($token as $key => $value){
-                            ?>
+            <?php
+            foreach ($teste->getToken() as $token) {
+                foreach ($token as $key => $value) {
+                    ?>
                             <tr>
                                 <td><x>[ </x> <?php echo $key;  ?><x> ]</x> </td>
                                 <td><x>[ </x> <?php echo $value;?><x> ]</x> </td>
                             </tr><?php
-                        }
-                    }
-                    ?></table><?php
+                }
             }
+            ?></table><?php
         }
-                ?>
+    }
+    ?>
 
     </pre>
 
