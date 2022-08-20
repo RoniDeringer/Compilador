@@ -23,20 +23,20 @@ echo '<h1>Análise léxica</h1>';
             require_once('Compilador.php');
             $entrada = $_POST["entrada"];
             $teste = new Compilador($entrada);
-        
+
     ?>
     <pre>
         <?php
-            if(!$teste->principal()){ 
+            if(!$teste->principal()){
         ?>
-        
+
             <table border="1px">
-                    
+
                 <tr>
                     <th>TOKEN</th>
                     <th>LEXEMA</th>
                 </tr>
-                    
+
                 <?php
                     foreach ($teste->getToken() as $token){
                         foreach ($token as $key => $value){
@@ -49,9 +49,9 @@ echo '<h1>Análise léxica</h1>';
                     }
                     ?></table><?php
             }
-        }    
+        }
                 ?>
-            
+
     </pre>
 
     </body>
