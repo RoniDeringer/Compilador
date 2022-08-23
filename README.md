@@ -4,7 +4,7 @@ Professora orientadora: Marcela Leite.
 
 Esse trabalho será divido em fases, segue as fases: 
 ## 📌 [Analise Léxica](https://github.com/RoniDeringer/Compilador/tree/master/analisador_lexico)
-Objetivo é identificar e classificar as "palavras" em uma sentença.<br>
+**Objetivo:** Identificar e classificar as "palavras" em uma sentença.<br>
 *Obs:* A função principal da análise léxica é criar uma lista de `tokens` que são essas palavras.<br>
 `Lexema` é uma sequência de caracteres reconhecidos por um padrão<br>
 
@@ -14,7 +14,30 @@ Objetivo é identificar e classificar as "palavras" em uma sentença.<br>
   * Token: pode ser o conjunto todo também. ex: < lexema, token >
 
 ___
-#### 📌 Análise Sintática
+## 📌 Análise Sintática
+**Objetivo:** Validar a ordem dos tokens a partir da gramática, e isso pode ser feito pelas:
+
+#### Análise Descendente (Top-Down)
+Dervivação (mais à esquerda)
+ a cada passo: determinar a produção a ser aplicada para uma variaval
+* Analisador com descida recursiva
+  * Exige retrocesso **backtrack**
+  * Criar um procedimento para cada varíavel até achar um terminal 
+* Analisador preditivo sem recursão
+  * Analise os próximos tokens para tomar decisão 
+
+
+####  Análise Ascendente (Bottom-Up)
+  * Redução
+  * Usa Recursão 
+  * +complexo e melhor desempenho
+
+
+Forma de Backus-Naur ou **BNF** `::=`
+
+
+<br>
+<br>
 
 #### 📌 Análise Sintática
 
