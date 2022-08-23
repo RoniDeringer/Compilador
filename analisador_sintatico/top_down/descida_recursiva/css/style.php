@@ -1,5 +1,5 @@
 <style>
-html,body{
+html,body{ 
   font-family: sans-serif;
   background-color: #333;
   color:#eee;
@@ -23,12 +23,12 @@ pre{
 
 strong{
   font-style: italic;
-  color: #ecf0f1
+  color: #ecf0f1  
 }
 
 entrada{
   font-style: italic;
-  color: aqua;
+  color: aqua;  
 }
 
 table, th, td {

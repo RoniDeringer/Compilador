@@ -5,7 +5,6 @@
 
 namespace src;
 
-
 /**
  * @author Roni Deringer
  */
@@ -13,7 +12,8 @@ namespace src;
 // $teste = new Compilador('a+');
 class DescidaRecursiva
 {
-    public function teste(){
-        echo ('teste');
+    public function teste()
+    {
+        return '123asasas';
     }
 }

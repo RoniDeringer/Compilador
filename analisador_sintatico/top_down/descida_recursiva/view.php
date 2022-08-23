@@ -7,7 +7,7 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <title> Descida Recursiva</title>
+        <title>Descida Recursiva</title>
     </head>
     <body>
         <pre>
@@ -19,20 +19,18 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
         </pre>
     <?php
     if (isset($_POST["entrada"])) {
+        require_once('AnaliseLexica.php');
+        require_once('DescidaRecursiva.php');
         $entrada = $_POST["entrada"];
 
-
-        require_once('AnaliseLexica.php');
-        $analisadorLexico = new src\AnaliseLexica($entrada);
-
-        require_once('DescidaRecursiva.php');
-        $analisadorSintatico = new src\DescidaRecursiva();
-
+        $lexica = new src\AnaliseLexica($entrada);
+        $sintatica = new src\DescidaRecursiva();
 
         ?>
     <pre>
         <?php
-        if (!$analisadorLexico->principal()) {
+        echo '<h2>Lista de Tokens</h2>';
+        if (!$lexica->principal()) {
             ?>
 
             <table border="1px">
@@ -43,7 +41,7 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
                 </tr>
 
             <?php
-            foreach ($analisadorLexico->getToken() as $token) {
+            foreach ($lexica->getToken() as $token) {
                 foreach ($token as $key => $value) {
                     ?>
                             <tr>
@@ -58,11 +56,12 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
     ?>
 
     </pre>
-    <pre>
-        <?php
-            $analisadorSintatico->teste();
-        ?>
-    </pre>
+
+<pre>
+    <?php
+     echo '<h2>Descida Recursiva</h2>';
+    ?>
+</pre>
 
     </body>
 </html>
