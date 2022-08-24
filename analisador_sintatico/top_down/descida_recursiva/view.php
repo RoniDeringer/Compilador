@@ -23,14 +23,15 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
         require_once('DescidaRecursiva.php');
         $entrada = $_POST["entrada"];
 
-        $lexica = new src\AnaliseLexica($entrada);
+        $lexica = new src\AnaliseLexica();
         $sintatica = new src\DescidaRecursiva();
+
 
         ?>
     <pre>
         <?php
         echo '<h2>Lista de Tokens</h2>';
-        if (!$lexica->principal()) {
+        if (!$lexica->principal($entrada)) {
             ?>
 
             <table border="1px">

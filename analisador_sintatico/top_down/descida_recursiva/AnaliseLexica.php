@@ -119,11 +119,6 @@ class AnaliseLexica
         return $this->lexema = $lexema;
     }
 
-    public function __construct($entrada)
-    {
-        $this->setEntrada($entrada);
-    }
-
 /**
  * FAZER AJUSTES:
  *  1- Remover warnings
@@ -132,7 +127,7 @@ class AnaliseLexica
  *  4- 'a+'  considerando só +f
  */
 
-    public function principal()
+    public function principal($entrada)
     {
         $tokenAtual = [];
         $listTokens = [];

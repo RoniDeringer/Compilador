@@ -6,7 +6,7 @@ Esse trabalho será divido em fases, segue as fases:
 ![Segue os indices:](img/fases_compilador.png)
 
 
-## 📌 [Analise Léxica](https://github.com/RoniDeringer/Compilador/tree/master/analisador_lexico)
+## 📌 [Analise Léxica](analisador_lexico)
 **Objetivo:** Identificar e classificar as "palavras" em uma sentença.<br>
 *Obs:* A função principal da análise léxica é criar uma lista de `tokens` que são essas palavras.<br>
 `Lexema` é uma sequência de caracteres reconhecidos por um padrão<br>
@@ -20,7 +20,7 @@ ___
 ## 📌 Análise Sintática
 **Objetivo:** Validar a ordem dos tokens a partir da gramática, e isso pode ser feito pelas:
 
-#### Análise Descendente (Top-Down)
+#### Análise Descendente [(Top-Down)](/analisador_sintatico/top_down)
 Dervivação (mais à esquerda)
  a cada passo: determinar a produção a ser aplicada para uma variaval
 * Analisador com descida recursiva
