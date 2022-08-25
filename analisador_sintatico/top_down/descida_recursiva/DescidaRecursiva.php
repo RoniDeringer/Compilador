@@ -11,19 +11,26 @@ $teste->start();
 
 class DescidaRecursiva
 {
-    private $cont;
+    private $cont = 0;
     private $anterior;
-    private $listToken = ['1','+','1','+','1'];
+    private $listToken = ['INT', 'MULTIPLICAÇÃO', 'INT'];
 
     public function start()
     {
-        $this->terminal($this->getListToken()[0]);
+        $this->e();
     }
-
 
     public function terminal($token)
     {
-        $ret = $this->getListToken()[$this->getCont()] . $token == $token;
+
+   //  $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
+
+        $lendo = $this->getListToken()[$this->getCont()];
+        $ret = $lendo . $token;
+        $teste = $lendo . $token == $token;
+
+        // $ret = $this->getListToken()[$this->getCont()] $token == $token;
+        //ret = lista_tk[cont].token == token
         $this->setCont($this->getCont() + 1);
         return $ret;
     }
@@ -35,13 +42,14 @@ class DescidaRecursiva
 
     public function e2()
     {
-        return $this->t() && $this->terminal('mais') && $this->e();
+        return $this->t() && $this->terminal('MAIS') && $this->e();
     }
 
     public function e()
     {
         $this->setAnterior($this->getCont());
-        if ($this->e()) {
+
+        if ($this->e1()) {
             return true;
         }
         $this->setCont($this->getAnterior());
@@ -55,7 +63,7 @@ class DescidaRecursiva
 
     public function t2()
     {
-        return $this->terminal('INT') && $this->terminal('MULT') && $this->t();
+        return $this->terminal('INT') && $this->terminal('MULTIPLICAÇÃO') && $this->t();
     }
 
     public function t3()

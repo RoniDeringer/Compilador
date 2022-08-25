@@ -9,7 +9,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
  * @author Roni Deringer
  */
 
-// $teste = new Compilador('a+');
+$teste = new Compilador('if (');
 class Compilador
 {
     private const ESTADOS = array('q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q12', 'q13', 'q14');
@@ -122,6 +122,7 @@ class Compilador
     public function __construct($entrada)
     {
         $this->setEntrada($entrada);
+        $this->principal();
     }
 
 /**
