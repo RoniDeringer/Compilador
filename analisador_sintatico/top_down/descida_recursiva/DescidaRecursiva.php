@@ -27,124 +27,133 @@ $teste->start();
  </html>
  <?php
 
-class DescidaRecursiva
-{
-    private $cont = 0;
-    private $anterior;
-    private $listToken = ['INT', 'MULTIPLICAÇÃO', 'INT'];
-
-    public function start()
+    class DescidaRecursiva
     {
-        echo($this->getListToken()[0]);
-        echo('<br>');
+        private $cont = 0;
+        private $anterior;
+        private $listToken = ['INT', 'MULTIPLICAÇÃO', 'INT'];
 
-        echo($this->getListToken()[1]);
-        echo('<br>');
+        public function start()
+        {
+            echo($this->getListToken()[0]);
+            echo('<br>');
 
-        echo($this->getListToken()[2]);
-        echo('<br>');
-        echo('<br>');
+            echo($this->getListToken()[1]);
+            echo('<br>');
 
-        echo ('VAI DAR ERRO PQ A GRAMATICA TA ERRADA!');
-        echo ('ele vai ler o primeiro [int]  e nao vai retornar true e finaliza');
+            echo($this->getListToken()[2]);
+            echo('<br>');
+            echo('<br>');
 
-        $this->e();
-    }
+            echo ('VAI DAR ERRO PQ A GRAMATICA TA ERRADA!');
+            echo ('ele vai ler o primeiro [int]  e nao vai retornar true e finaliza');
+            echo '<br>';
+            echo '<br>';
 
-    public function terminal($token)
-    {
-        $ret = $this->getListToken()[$this->getCont()] ==  $token;
-        $this->setCont($this->getCont()+1);
-        return $ret;
-    }
-
-    public function e1()
-    {
-        return $this->t();
-    }
-
-    public function e2()
-    {
-        return $this->t() && $this->terminal('MAIS') && $this->e();
-    }
-
-    public function e()
-    {
-        $this->setAnterior($this->getCont());
-
-        if ($this->e1()) {
-            return true;
+            $this->e();
         }
-        $this->setCont($this->getAnterior());
-        return $this->e2();
-    }
 
-    public function t1()
-    {
-        return $this->terminal('INT');
-    }
+        public function terminal($token)
+        {
+            $ret = $this->getListToken()[$this->getCont()] ==  $token;
+            $this->setCont($this->getCont() + 1);
+            return $ret;
+        }
 
-    public function t2()
-    {
-        return $this->terminal('INT') && $this->terminal('MULTIPLICAÇÃO') && $this->t();
-    }
+        public function e1()
+        {
+            echo 'e1 - ';
+            return $this->t();
+        }
 
-    public function t3()
-    {
-        return $this->terminal('AP') && $this->e() && $this->terminal('FP');
-    }
+        public function e2()
+        {
+            echo 'e2 - ';
+            return $this->t() && $this->terminal('MAIS') && $this->e();
+        }
 
-    public function t()
-    {
-        $this->setAnterior($this->getCont());
-        if ($this->t1()) {
-            return true;
-        } else {
+        public function e()
+        {
+            echo 'e - ';
+            $this->setAnterior($this->getCont());
+
+            if ($this->e1()) {
+                return true;
+            }
             $this->setCont($this->getAnterior());
-            if ($this->t2()) {
+            return $this->e2();
+        }
+
+        public function t1()
+        {
+            echo 't1 - ';
+            return $this->terminal('INT');
+        }
+
+        public function t2()
+        {
+            echo 't2 - ';
+            return $this->terminal('INT') && $this->terminal('MULTIPLICAÇÃO') && $this->t();
+        }
+
+        public function t3()
+        {
+            echo 't3 - ';
+            return $this->terminal('AP') && $this->e() && $this->terminal('FP');
+        }
+
+        public function t()
+        {
+            echo 't - ';
+            $this->setAnterior($this->getCont());
+            if ($this->t1()) {
                 return true;
             } else {
                 $this->setCont($this->getAnterior());
-                return $this->t3();
+                if ($this->t2()) {
+                    return true;
+                } else {
+                    $this->setCont($this->getAnterior());
+                    return $this->t3();
+                }
             }
         }
+
+
+
+        //GETTER AND SETTERS
+        public function getAnterior()
+        {
+            return $this->anterior;
+        }
+
+        public function setAnterior($anterior)
+        {
+            return $this->anterior = $anterior;
+        }
+
+        public function getCont()
+        {
+            return $this->cont;
+        }
+
+        public function setCont($cont)
+        {
+            return $this->cont = $cont;
+        }
+
+        public function getListToken()
+        {
+            return $this->listToken;
+        }
+
+        public function setListToken($listToken)
+        {
+            $this->listToken = $listToken;
+
+            return $this;
+        }
     }
-
-
-
-    //GETTER AND SETTERS
-    public function getAnterior()
-    {
-        return $this->anterior;
-    }
-
-    public function setAnterior($anterior)
-    {
-        return $this->anterior = $anterior;
-    }
-
-    public function getCont()
-    {
-        return $this->cont;
-    }
-
-    public function setCont($cont)
-    {
-        return $this->cont = $cont;
-    }
-
-    public function getListToken()
-    {
-        return $this->listToken;
-    }
-
-    public function setListToken($listToken)
-    {
-        $this->listToken = $listToken;
-
-        return $this;
-    }
-}
 
 
 /**
