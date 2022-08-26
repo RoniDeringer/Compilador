@@ -52,5 +52,14 @@ gramatica
     <P> ::=if AP <VAR> FP const PV;
     <VAR> ::= id|const;
 
-
 **$** significa q deu tudo certo
+
+## ⚡ Gramática:
+
+    PROGRAMA::=
+    S       ::=     FUNCAO( CORPO ) | CORPO
+    FUNCAO  :=      funcao
+    CORPO   ::=     IMPRIMA | VARIAVEL | S | IF
+    IMPRIMA ::=
+    IF      ::=     if( BLOCO )
+    VARIAVEL::=     NOMEVARIAVEL =
