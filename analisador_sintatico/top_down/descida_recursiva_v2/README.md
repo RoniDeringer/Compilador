@@ -56,10 +56,18 @@ gramatica
 
 ## ⚡ Gramática:
 
-    PROGRAMA::=
-    S       ::=     FUNCAO( CORPO ) | CORPO
-    FUNCAO  :=      funcao
-    CORPO   ::=     IMPRIMA | VARIAVEL | S | IF
-    IMPRIMA ::=
-    IF      ::=     if( BLOCO )
-    VARIAVEL::=     NOMEVARIAVEL =
+    PROGRAMA        ::=
+    S               ::=     FUNCAO( CORPO ) | CORPO
+    FUNCAO          ::=     funcao
+    CORPO           ::=     IMPRIMA | VARIAVEL | CORPO | IF
+    IMPRIMA         ::=     imprima NOMEVARIAVEL
+    IF              ::=     if( BLOCO )
+    VARIAVEL        ::=     NOMEVARIAVEL = LETRAS
+    BLOCO           ::=     PARAM OPERADOR PARAM
+    OPERADOR        ::=     [>, <, ==, !=]
+    PARAM           ::=     NOMEVARIAVEL | CONST
+    CONST           ::=     NUMEROS
+    NOMEVARIAVEL    ::=     LETRAS
+
+    LETRAS          ::=     [a-zA-Z]
+    NUMEROS         ::=     [0-9]
