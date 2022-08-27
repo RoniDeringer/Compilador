@@ -2,9 +2,8 @@
 
 namespace src;
 
-/**
- * @author Roni Deringer
- */
+ini_set('display_errors', 0);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 require_once('Token.php');
 
@@ -73,13 +72,13 @@ class AnalisadorLexico extends Token
 
     private $entrada = '';
 
+    private $isAccept = false;
 
-    public function principal()
+
+    public function principal($entrada)
     {
-
-        echo 'funcao principal';
-
-      /**
+        $sintatico = new AnalisadorSintatico();
+        $this->setEntrada($entrada);
         $tokenAtual = [];
         $listTokens = [];
         $i = 0;
@@ -94,16 +93,17 @@ class AnalisadorLexico extends Token
                 if (array_key_exists($this->getEstado(), AnalisadorLexico::ESTADOS_FINAIS)) {
                     $tokenAtual = array(AnalisadorLexico::ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema());
                     array_push($listTokens, $tokenAtual);
-                    $this->setToken($listTokens);
+                    $this->setListToken($listTokens);
                     $this->setEstado('q0');
                     $this->setLexema('');
                 } else {
                     echo "Código inválido!";
-                    return true;
+                    return $this->setIsAccept(false);
                 }
             }
         }
-        */
+        $this->setIsAccept(true);
+        return $sintatico->teste($this);
     }
 
 
@@ -127,6 +127,18 @@ class AnalisadorLexico extends Token
     public function setEntrada($entrada)
     {
         $this->entrada = $entrada;
+
+        return $this;
+    }
+
+    public function getIsAccept()
+    {
+        return $this->isAccept;
+    }
+
+    public function setIsAccept($isAccept)
+    {
+        $this->isAccept = $isAccept;
 
         return $this;
     }

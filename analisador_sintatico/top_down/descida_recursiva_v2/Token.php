@@ -9,9 +9,9 @@ namespace src;
 
 class Token
 {
-    private $token = [];
+    private $listToken = [];
 
-    private $lexema;
+    private $lexema = '';
 
     private $posInicial;
 
@@ -20,18 +20,6 @@ class Token
 
 
 
-
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    public function setToken($token)
-    {
-        $this->token = $token;
-
-        return $this;
-    }
 
     public function getLexema()
     {
@@ -64,6 +52,17 @@ class Token
     public function setPosFinal($posFinal)
     {
         $this->posFinal = $posFinal;
+
+        return $this;
+    }
+
+    public function getListToken()
+    {
+        return $this->listToken;
+    }
+    public function setListToken($listToken)
+    {
+        $this->listToken = $listToken;
 
         return $this;
     }
