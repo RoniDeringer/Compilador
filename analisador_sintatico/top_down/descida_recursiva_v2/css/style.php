@@ -1,16 +1,20 @@
 <style>
 html,body{
-  font-family: sans-serif;
-  background-color: #333;
-  color:#eee;
-  padding-bottom:50%;
+    font-family: sans-serif;
+    background-color: #333;
+    color:#eee;
+    padding-bottom:50%;
 }
 h1{
     margin:0em 5em;
 }
 h2{
+    margin: 0%;
     color:#458688;
     font-size: 23px;
+}
+form{
+    margin: auto;
 }
 hr{
     margin-top: 40px;
@@ -21,6 +25,7 @@ pre{
     margin:2em 5em;
     background-color: #444;
     padding:5px;
+    width: 50em;
     font-size: 20px;
     color: #ecf0f1;
 }

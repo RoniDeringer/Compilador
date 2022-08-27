@@ -42,6 +42,7 @@ if (isset($_POST["entrada"])) {
     $lexico->principal($entrada);
     ?>
         <pre>
+        <h2>Lista de Tokens:</h2>
             <table border="1px">
 
                 <tr>
