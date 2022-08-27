@@ -32,9 +32,9 @@ require_once('AnalisadorSintatico.php');
 $lexico = new src\AnalisadorLexico();
 $sintatico = new src\AnalisadorSintatico($lexico);
 
-if ($sinatico->validaCodigo() ==true ){
+if ($sinatico->validaCodigo() == true) {
     echo "codigo aceito";
-}else{
+} else {
     echo "codigo invalido";
 }
 
