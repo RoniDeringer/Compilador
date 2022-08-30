@@ -12,6 +12,8 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
     <title>descidaRecursiva</title>
 </head>
 <body>
+
+<!-- INTRO -->
     <pre>
         <h2>Linguagem esperada:</h2>
         funcao nome (variavel){
@@ -23,6 +25,7 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
         chama nome()
     </pre>
 
+    <!-- FORMULARIO -->
     <pre>
         <form action="" method="post">
             <label for="entrada">somente letras minisculas!</label>
@@ -30,6 +33,8 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
             <input type="submit" value="enviar">
         </form>
     </pre>
+
+    <!-- GET FORUMALARIO -->
 <?php
 if (isset($_POST["entrada"])) {
     $entrada = $_POST["entrada"];
@@ -37,12 +42,17 @@ if (isset($_POST["entrada"])) {
     require_once('AnalisadorLexico.php');
     require_once('AnalisadorSintatico.php');
     $lexico = new src\AnalisadorLexico();
-    $sintatico = new src\AnalisadorSintatico($lexico);
+    $sintatico = new src\AnalisadorSintatico();
 
-    $lexico->principal($entrada);
+    $lexico->createListToken($entrada);
     ?>
+
+    <!-- LIST TOKEN -->
         <pre>
-        <h2>Lista de Tokens:</h2>
+            <?php
+            if ($lexico->getIsAccept()) {
+                ?>
+            <h2>Lista de Tokens:</h2>
             <table border="1px">
 
                 <tr>
@@ -50,28 +60,36 @@ if (isset($_POST["entrada"])) {
                     <th>LEXEMA</th>
                 </tr>
 
-    <?php
-    foreach ($lexico->getListToken() as $token) {
-        foreach ($token as $key => $value) {
-            ?>
-                            <tr>
-                                <td><x>[ </x> <?php echo $key;  ?><x> ]</x> </td>
-                                <td><x>[ </x> <?php echo $value;?><x> ]</x> </td>
-                            </tr><?php
-        }
-    }
-    ?></table>
+                <?php
+                foreach ($lexico->getListToken() as $token) {
+                    foreach ($token as $key => $value) {
+                        ?>
+                        <tr>
+                            <td><x>[ </x> <?php echo $key;  ?><x> ]</x> </td>
+                            <td><x>[ </x> <?php echo $value;?><x> ]</x> </td>
+                        </tr><?php
+                    }
+                }
+                ?>
+            </table>
+                <?php
+            } else {
+                ?>
+                <div style="color: darkred;">TOKENS NÃO ACEITO!</div>
+            <?php } ?>
         </pre>
 
-<pre>
-    <?php
-    if ($lexico->getIsAccept()) {
-        echo '<br>';
-        echo "codigo aceito";
-    } else {
-        echo '<br>';
-        echo "codigo invalido";
-    }
-}
+    <!-- ANALISE SINTATICA  -->
+    <pre>
+           <?php
+            echo ($sintatico->validateOrderToken($lexico));
+            if ($sintatico->validateOrderToken($lexico)) {
+                ?>
+                    <div style="color: darkgreen;">GRAMÁTICA ACEITA!</div>
+            <?php } else { ?>
+                    <div style="color: darkred;">GRAMÁTICA NÃO ACEITA!</div>
+                    <?php
+            };
+} //isset 'entrada'
 ?>
-</pre>
+    </pre>

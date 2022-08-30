@@ -57,9 +57,8 @@ gramatica
 ## ⚡ Gramática:
 
     PROGRAMA        ::=
-    S               ::=     FUNCAO( CORPO ) | CORPO
-    FUNCAO          ::=     funcao
-    CORPO           ::=     IMPRIMA | VARIAVEL | CORPO | IF
+    S               ::=     funcao( CORPO ) | CORPO
+    CORPO           ::=     IMPRIMA | VARIAVEL | IF
     IMPRIMA         ::=     imprima NOMEVARIAVEL
     IF              ::=     if( BLOCO )
     VARIAVEL        ::=     NOMEVARIAVEL = LETRAS
