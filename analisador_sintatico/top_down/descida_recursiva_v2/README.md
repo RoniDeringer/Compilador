@@ -63,7 +63,7 @@ gramatica
     IF              ::=     if( BLOCO )
     VARIAVEL        ::=     NOMEVARIAVEL = LETRAS
     BLOCO           ::=     PARAM OPERADOR PARAM
-    OPERADOR        ::=     [>, <, ==, !=]
+    OPERADOR        ::=     > | < | == | !=
     PARAM           ::=     NOMEVARIAVEL | CONST
     CONST           ::=     NUMEROS
     NOMEVARIAVEL    ::=     LETRAS
