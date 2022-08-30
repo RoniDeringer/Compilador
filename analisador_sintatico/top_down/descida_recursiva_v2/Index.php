@@ -82,8 +82,8 @@ if (isset($_POST["entrada"])) {
     <!-- ANALISE SINTATICA  -->
     <pre>
            <?php
-            echo ($sintatico->validateOrderToken($lexico));
-            if ($sintatico->validateOrderToken($lexico)) {
+            echo ($sintatico->start($lexico));
+            if ($sintatico->start($lexico)) {
                 ?>
                     <div style="color: darkgreen;">GRAMÁTICA ACEITA!</div>
             <?php } else { ?>

@@ -9,7 +9,7 @@ namespace src;
 
 class Token
 {
-    private $listToken = [];
+    private $nome = '';
 
     private $lexema = '';
 
@@ -56,13 +56,13 @@ class Token
         return $this;
     }
 
-    public function getListToken()
+    public function getNome()
     {
-        return $this->listToken;
+        return $this->nome;
     }
-    public function setListToken($listToken)
+    public function setNome($nome)
     {
-        $this->listToken = $listToken;
+        $this->nome = $nome;
 
         return $this;
     }

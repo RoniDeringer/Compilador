@@ -15,27 +15,20 @@ class AnalisadorSintatico
     public $anterior;
 
 
-    public function validateOrderToken($lexico)
+    public function start($lexico)
     {
-        $ret = $this->getLexico()->getListToken()[$this->getCont()];
-        return $ret;
-
-
-
-        // // $this->setLexico($lexico);
-        // $this->s();
+        $this->setLexico($lexico);
+        $this->s();
     }
 
 
 
     public function term($token)
     {
-        $ret = $this->getLexico()->getListToken()[$this->getCont()];
+        $this->setCont($this->getCont() + 1);
+        $ret = $this->getLexico()->getListToken()[$this->getCont()]->getNome() == $token;
         return $ret;
 
-        // $ret = $this->getListToken()[$this->getCont()] ==  $token;
-        // $this->setCont($this->getCont() + 1);
-        // // return $ret;
     }
 
 
@@ -54,18 +47,46 @@ class AnalisadorSintatico
 
     public function s1()
     {
+    echo 'S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } ';
         return
         $this->term('funcao') and
         $this->term('abre_parenteses') and
-        $this->corpo() and
-        $this->term('fecha_parenteses');
+        $this->lista_parametro() and
+        $this->term('fecha_parenteses')and
+        $this->term('abre_chave')and
+        $this->lista_corpo()and
+        $this->term('fecha_chave');
     }
 
     public function s2()
     {
-        return $this->corpo(); //nao posso chamar o corpo()  direto?
+        return $this->lista_corpo();
     }
 
+
+    /**
+     * LISTA_CORPO ---------------
+     */
+    public function lista_corpo()
+    {
+        if ($this->lista_corpo1()) {
+            return true;
+        } else {
+            $this->setCont($this->getAnterior());
+            return $this->lista_corpo2();
+        }
+    }
+
+    public function lista_corpo1(){
+        return
+        $this->corpo() and
+        $this->lista_corpo();
+    }
+
+    public function lista_corpo2(){
+        return
+        $this->corpo();
+    }
 
     /**
      * CORPO ---------------
@@ -85,6 +106,42 @@ class AnalisadorSintatico
             }
         }
     }
+
+    /**
+     * LISTA_PARAMETRO
+     */
+    public function lista_parametro()
+    {
+        if ($this->lista_parametro1()) {
+            return true;
+        } else {
+            $this->setCont($this->getAnterior());
+            return $this->lista_parametro2();
+        }
+    }
+
+    public function lista_parametro1()
+    {
+        return
+        $this->variavel() and
+        $this->lista_parametro();
+    }
+
+    public function lista_parametro2()
+    {
+        return
+        $this->parametro();
+    }
+
+    /**
+    * PARAMETRO
+    */
+    public function parametro()
+    {
+        return $this->variavel();
+    }
+
+
 
 
 /**
@@ -135,8 +192,29 @@ class AnalisadorSintatico
  */
     public function operador()
     {
-        return 0;   //////?????????????????
+        {
+            $this->setAnterior($this->getCont());
+            if ($this->term('maior')) {
+                return true;
+            } else {
+                $this->setCont($this->getAnterior());
+                if ($this->term('menor')) {
+                    return true;
+                } else {
+                    $this->setCont($this->getAnterior());
+                }
+                if($this->term('igual')){
+                    return true;
+                }else{
+                    $this->setCont($this->getAnterior());
+                    return $this->term('diferente');
+
+                }
+
+            }
+        }
     }
+
 
 
 /**

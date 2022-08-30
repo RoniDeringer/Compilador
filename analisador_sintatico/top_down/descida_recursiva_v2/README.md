@@ -23,6 +23,7 @@ Fazer um analisador Sintático que aceite:
     * lista de tokens do analisador lexico
     * o retorno do analisador sintatico se o código foi aceito ou nao
 
+LL LEFT -> RIGHT  derivação mais a esquerda
 
 ## 🔧 Ferramenta Gals:
 Tokens:
@@ -57,8 +58,10 @@ gramatica
 ## ⚡ Gramática:
 
     PROGRAMA        ::=
-    S               ::=     funcao( CORPO ) | CORPO
+    S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } | LISTA_CORPO
+    LISTA_CORPO     ::=     CORPO LISTA_CORPO | CORPO
     CORPO           ::=     IMPRIMA | VARIAVEL | IF
+    LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO | VARIAVEL (ARRUMAR)
     IMPRIMA         ::=     imprima NOMEVARIAVEL
     IF              ::=     if( BLOCO )
     VARIAVEL        ::=     NOMEVARIAVEL = LETRAS
