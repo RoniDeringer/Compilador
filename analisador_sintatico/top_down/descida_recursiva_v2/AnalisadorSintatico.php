@@ -28,7 +28,6 @@ class AnalisadorSintatico
         $this->setCont($this->getCont() + 1);
         $ret = $this->getLexico()->getListToken()[$this->getCont()]->getNome() == $token;
         return $ret;
-
     }
 
 
@@ -47,43 +46,48 @@ class AnalisadorSintatico
 
     public function s1()
     {
-    echo 'S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } ';
+        echo 'S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } ';
         return
         $this->term('funcao') and
         $this->term('abre_parenteses') and
-        $this->lista_parametro() and
-        $this->term('fecha_parenteses')and
-        $this->term('abre_chave')and
-        $this->lista_corpo()and
+        $this->listaParametro() and
+        $this->term('fecha_parenteses') and
+        $this->term('abre_chave') and
+        $this->listaCorpo() and
         $this->term('fecha_chave');
     }
 
     public function s2()
     {
-        return $this->lista_corpo();
+        return $this->listaCorpo();
     }
 
 
     /**
      * LISTA_CORPO ---------------
      */
-    public function lista_corpo()
+    public function listaCorpo()
     {
-        if ($this->lista_corpo1()) {
+        echo 'LISTA_CORPO     ::=     CORPO LISTA_CORPO | CORPO';
+        if ($this->listaCorpo1()) {
             return true;
         } else {
             $this->setCont($this->getAnterior());
-            return $this->lista_corpo2();
+            return $this->listaCorpo2();
         }
     }
 
-    public function lista_corpo1(){
+    public function listaCorpo1()
+    {
+        echo 'LISTA_CORPO     ::=     CORPO LISTA_CORPO';
         return
         $this->corpo() and
-        $this->lista_corpo();
+        $this->listaCorpo();
     }
 
-    public function lista_corpo2(){
+    public function listaCorpo2()
+    {
+        echo 'LISTA_CORPO     ::=      CORPO';
         return
         $this->corpo();
     }
@@ -93,6 +97,7 @@ class AnalisadorSintatico
      */
     public function corpo()
     {
+        echo 'CORPO           ::=     IMPRIMA | VARIAVEL | IF';
         $this->setAnterior($this->getCont());
         if ($this->imprima()) {
             return true;
@@ -110,38 +115,32 @@ class AnalisadorSintatico
     /**
      * LISTA_PARAMETRO
      */
-    public function lista_parametro()
+    public function listaParametro()
     {
-        if ($this->lista_parametro1()) {
+        echo 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO | VARIAVEL (ARRUMAR)';
+        if ($this->listaParametro1()) {
             return true;
         } else {
             $this->setCont($this->getAnterior());
-            return $this->lista_parametro2();
+            return $this->listaParametro2();
         }
     }
 
-    public function lista_parametro1()
+    public function listaParametro1()
     {
+        echo 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO';
         return
         $this->variavel() and
-        $this->lista_parametro();
+        $this->listaParametro();
     }
 
-    public function lista_parametro2()
+    public function listaParametro2()
     {
+        echo 'LISTA_PARAMETRO ::=     | VARIAVEL';
+
         return
-        $this->parametro();
+        $this->variavel();
     }
-
-    /**
-    * PARAMETRO
-    */
-    public function parametro()
-    {
-        return $this->variavel();
-    }
-
-
 
 
 /**
@@ -149,6 +148,7 @@ class AnalisadorSintatico
  */
     public function imprima()
     {
+        echo 'IMPRIMA         ::=     imprima NOMEVARIAVEL';
         return
         $this->term('imprima') and
         $this->nomeVariavel();
@@ -159,6 +159,7 @@ class AnalisadorSintatico
  */
     public function variavel()
     {
+        echo 'VARIAVEL        ::=     NOMEVARIAVEL = LETRAS';
         return
         $this->nomeVariavel() and
         $this->term('=') and
@@ -170,6 +171,7 @@ class AnalisadorSintatico
  */
     public function if()
     {
+        echo 'IF              ::=     if( BLOCO )';
         return
         $this->term('if') and
         $this->bloco();
@@ -180,6 +182,7 @@ class AnalisadorSintatico
  */
     public function bloco()
     {
+        echo'BLOCO           ::=     PARAM OPERADOR PARAM';
         return
         $this->param() and
         $this->operador() and
@@ -192,25 +195,22 @@ class AnalisadorSintatico
  */
     public function operador()
     {
-        {
-            $this->setAnterior($this->getCont());
-            if ($this->term('maior')) {
+        echo'OPERADOR        ::=     > | < | == | !=';
+        $this->setAnterior($this->getCont());
+        if ($this->term('maior')) {
+            return true;
+        } else {
+            $this->setCont($this->getAnterior());
+            if ($this->term('menor')) {
                 return true;
             } else {
                 $this->setCont($this->getAnterior());
-                if ($this->term('menor')) {
-                    return true;
-                } else {
-                    $this->setCont($this->getAnterior());
-                }
-                if($this->term('igual')){
-                    return true;
-                }else{
-                    $this->setCont($this->getAnterior());
-                    return $this->term('diferente');
-
-                }
-
+            }
+            if ($this->term('igual')) {
+                return true;
+            } else {
+                $this->setCont($this->getAnterior());
+                return $this->term('diferente');
             }
         }
     }
@@ -222,6 +222,7 @@ class AnalisadorSintatico
  */
     public function param()
     {
+        echo'PARAM           ::=     NOMEVARIAVEL | CONST';
         $this->setAnterior($this->getCont());
         if ($this->nomeVariavel()) {
             return true;
@@ -237,6 +238,7 @@ class AnalisadorSintatico
  */
     public function const()
     {
+        echo'CONST           ::=     NUMEROS';
         return $this->term('numeros');
     }
 
@@ -245,6 +247,7 @@ class AnalisadorSintatico
  */
     public function nomeVariavel()
     {
+        echo 'NOMEVARIAVEL    ::=     LETRAS';
         return $this->term('letras');
     }
 
@@ -256,8 +259,6 @@ class AnalisadorSintatico
     {
         return $this->term('[a-zA-Z');
     }
-
-
 
 
 
