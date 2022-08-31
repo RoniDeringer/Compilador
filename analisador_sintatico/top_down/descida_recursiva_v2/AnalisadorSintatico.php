@@ -22,7 +22,6 @@ class AnalisadorSintatico
     }
 
 
-
     public function term($token)
     {
         $this->setCont($this->getCont() + 1);
@@ -99,17 +98,35 @@ class AnalisadorSintatico
     {
         echo 'CORPO           ::=     IMPRIMA | VARIAVEL | IF';
         $this->setAnterior($this->getCont());
-        if ($this->imprima()) {
+        if ($this->corpo1()) {
             return true;
         } else {
             $this->setCont($this->getAnterior());
-            if ($this->variavel()) {
+            if ($this->corpo2()) {
                 return true;
             } else {
                 $this->setCont($this->getAnterior());
-                return $this->if();
+                return $this->corpo3();
             }
         }
+    }
+
+
+    public function corpo1()
+    {
+        return $this->imprima();
+    }
+
+
+    public function corpo2()
+    {
+        return $this->variavel();
+    }
+
+
+    public function corpo3()
+    {
+        return $this->if();
     }
 
     /**
