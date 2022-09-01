@@ -7,7 +7,11 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 require_once('Token.php');
 
-class AnalisadorLexico extends Token
+$lexico = new AnalisadorLexico();
+$lexico->createListToken('if (');
+
+
+class AnalisadorLexico
 {
 //IMPLEMENTAR O POS. FINAL E AS QUEBRAS DE LINHAS
 
@@ -83,34 +87,34 @@ class AnalisadorLexico extends Token
 
     private $listToken = '';
 
-
     public function createListToken($entrada)
     {
 
-    /**
-     * POPULAR A LISTA DE TOKEN A PARTIR DO NOME E LEXEMA DA CLASS TOKEN
-     */
+        /**
+         * POPULAR A LISTA DE TOKEN A PARTIR DO NOME E LEXEMA DA CLASS TOKEN
+         */
 
 
-        $sintatico = new AnalisadorSintatico();
         $this->setEntrada($entrada);
         $tokenAtual = [];
         $listTokens = [];
         $i = 0;
+        $objToken = new Token();
+
         while ($i <= strlen($this->getEntrada())) {
             $lendo = $this->getEntrada()[$i];
+
             if (isset(AnalisadorLexico::DELTA[$this->getEstado()][$this->getEntrada()[$i]])) {
                 $proximo_estado = AnalisadorLexico::DELTA[$this->getEstado()][$this->getEntrada()[$i]] ?: '';
                 $this->setEstado($proximo_estado);
-                $this->setLexema($this->getLexema() . $this->getEntrada()[$i]);
+                $objToken->setLexema($objToken->getLexema() . $this->getEntrada()[$i]);
                 $i++;
             } else {
                 if (array_key_exists($this->getEstado(), AnalisadorLexico::ESTADOS_FINAIS)) {
-                    $tokenAtual = array(AnalisadorLexico::ESTADOS_FINAIS[$this->getEstado()] => $this->getLexema());
-                    array_push($listTokens, $tokenAtual);
-                    $this->setListToken($listTokens);
+                    $tokenAtual = array(AnalisadorLexico::ESTADOS_FINAIS[$this->getEstado()] => $objToken->getLexema());
+                    array_push($listTokens, $this->populaObjetoToken($tokenAtual, $objToken));
                     $this->setEstado('q0');
-                    $this->setLexema('');
+                    $objToken = new Token();
                 } else {
                     return $this->setIsAccept(false);
                 }
@@ -120,6 +124,15 @@ class AnalisadorLexico extends Token
     }
 
 
+
+    public function populaObjetoToken($tokenAtual, $objToken)
+    {
+        foreach ($tokenAtual as $key => $value) {
+            $objToken->setNome($key);
+            $objToken->setLexema($value);
+        }
+        return $objToken;
+    }
 
 
     public function getEstado()
