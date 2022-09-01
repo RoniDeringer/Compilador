@@ -4,14 +4,15 @@ namespace src;
 
 use OutOfRangeException;
 
-/**
- * @author Roni Deringer
- */
+require_once('AnalisadorLexico.php');
+$teste = new AnalisadorSintatico();
+$teste->startTest();
+
 
 class AnalisadorSintatico
 {
     public $lexico;
-    public $cont = 0;
+    public $cont = -1;
     public $anterior;
 
 
@@ -20,12 +21,30 @@ class AnalisadorSintatico
         $this->setLexico($lexico);
         $this->s();
     }
+    public function startTest()
+    {
+        $lexico = new \src\AnalisadorLexico();
+
+        $this->setLexico($lexico);
+        $this->getLexico()->setListToken([
+                                        0 => 'FUNCAO',
+                                        1 => 'abre_parenteses',
+                                        2 => 'VARIAVEL',
+                                        3 => 'fecha_parenteses',
+                                        4 => 'abre_chave',
+                                        5 => 'imprima',
+                                        6 => 'VARIAVEL',
+                                        7 => 'fecha_chave',
+                                    ]);
+                                        //no TERM ele nao reconhece as chaves strings
+        $this->s();
+    }
 
 
     public function term($token)
     {
         $this->setCont($this->getCont() + 1);
-        $ret = $this->getLexico()->getListToken()[$this->getCont()]->getNome() == $token;
+        $ret = $this->getLexico()->getListToken()[$this->getCont()] == $token;
         return $ret;
     }
 
@@ -39,7 +58,7 @@ class AnalisadorSintatico
             return true;
         } else {
             $this->setCont($this->getAnterior());
-            return $this->s2(); //nao posso chamar o corpo()  direto?
+            return $this->s2();
         }
     }
 
@@ -47,7 +66,7 @@ class AnalisadorSintatico
     {
         echo 'S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } ';
         return
-        $this->term('funcao') and
+        $this->term('FUNCAO') and
         $this->term('abre_parenteses') and
         $this->listaParametro() and
         $this->term('fecha_parenteses') and
@@ -67,7 +86,7 @@ class AnalisadorSintatico
      */
     public function listaCorpo()
     {
-        echo 'LISTA_CORPO     ::=     CORPO LISTA_CORPO | CORPO';
+        echo 'LISTA_CORPO     ::=     CORPO | CORPO LISTA_CORPO';
         if ($this->listaCorpo1()) {
             return true;
         } else {
@@ -78,18 +97,19 @@ class AnalisadorSintatico
 
     public function listaCorpo1()
     {
+        echo 'LISTA_CORPO     ::=      CORPO';
+        return
+        $this->corpo();
+    }
+
+    public function listaCorpo2()
+    {
         echo 'LISTA_CORPO     ::=     CORPO LISTA_CORPO';
         return
         $this->corpo() and
         $this->listaCorpo();
     }
 
-    public function listaCorpo2()
-    {
-        echo 'LISTA_CORPO     ::=      CORPO';
-        return
-        $this->corpo();
-    }
 
     /**
      * CORPO ---------------
@@ -135,6 +155,10 @@ class AnalisadorSintatico
     public function listaParametro()
     {
         echo 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO | VARIAVEL (ARRUMAR)';
+
+
+        $this->setAnterior($this->getCont());
+
         if ($this->listaParametro1()) {
             return true;
         } else {
@@ -145,18 +169,19 @@ class AnalisadorSintatico
 
     public function listaParametro1()
     {
-        echo 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO';
-        return
-        $this->variavel() and
-        $this->listaParametro();
-    }
-
-    public function listaParametro2()
-    {
         echo 'LISTA_PARAMETRO ::=     | VARIAVEL';
 
         return
         $this->variavel();
+    }
+
+
+    public function listaParametro2()
+    {
+        echo 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO';
+        return
+        $this->variavel() and
+        $this->listaParametro();
     }
 
 
@@ -177,10 +202,13 @@ class AnalisadorSintatico
     public function variavel()
     {
         echo 'VARIAVEL        ::=     NOMEVARIAVEL = LETRAS';
-        return
-        $this->nomeVariavel() and
-        $this->term('=') and
-        $this->letras();
+
+        return $this->nomeVariavel();
+
+        // return
+        // $this->nomeVariavel() and
+        // $this->term('=') and
+        // $this->letras();
     }
 
 /**
@@ -265,7 +293,7 @@ class AnalisadorSintatico
     public function nomeVariavel()
     {
         echo 'NOMEVARIAVEL    ::=     LETRAS';
-        return $this->term('letras');
+        return $this->term('VARIAVEL');
     }
 
 

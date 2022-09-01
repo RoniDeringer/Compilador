@@ -59,9 +59,9 @@ gramatica
 
     PROGRAMA        ::=
     S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } | LISTA_CORPO
-    LISTA_CORPO     ::=     CORPO LISTA_CORPO | CORPO
+    LISTA_CORPO     ::=     CORPO | CORPO LISTA_CORPO
     CORPO           ::=     IMPRIMA | VARIAVEL | IF
-    LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO | VARIAVEL (ARRUMAR)
+    LISTA_PARAMETRO ::=     VARIAVEL | VARIAVEL LISTA_PARAMETRO
     IMPRIMA         ::=     imprima NOMEVARIAVEL
     IF              ::=     if( BLOCO )
     VARIAVEL        ::=     NOMEVARIAVEL = LETRAS
@@ -73,3 +73,11 @@ gramatica
 
     LETRAS          ::=     [a-zA-Z]
     NUMEROS         ::=     [0-9]
+
+
+## ERROS:
+
+o termminal **variavel** pois vai ter letras(?)
+**letras** é sacanagem, pode tirar esse lixo
+
+RECURSÃO NA listaCorpo e listaParametro ******

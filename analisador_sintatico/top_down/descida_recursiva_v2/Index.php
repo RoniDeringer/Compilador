@@ -15,14 +15,10 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
 
 <!-- INTRO -->
     <pre>
-        <h2>Linguagem esperada:</h2>
-        funcao nome (variavel){
-            tipo variavel = valor
-            if(valor > numero){
-                imprime (valor)
-            }
-        }
-        chama nome()
+        <h2>Copie e cole para teste:</h2>
+    funcao(teste){imprima teste}
+
+    cuidar com o espaço
     </pre>
 
     <!-- FORMULARIO -->
@@ -42,7 +38,6 @@ if (isset($_POST["entrada"])) {
     require_once('AnalisadorLexico.php');
     require_once('AnalisadorSintatico.php');
     $lexico = new src\AnalisadorLexico();
-    $sintatico = new src\AnalisadorSintatico();
 
     $lexico->createListToken($entrada);
     ?>

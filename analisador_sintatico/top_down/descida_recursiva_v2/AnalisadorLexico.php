@@ -86,6 +86,12 @@ class AnalisadorLexico extends Token
 
     public function createListToken($entrada)
     {
+
+    /**
+     * POPULAR A LISTA DE TOKEN A PARTIR DO NOME E LEXEMA DA CLASS TOKEN
+     */
+
+
         $sintatico = new AnalisadorSintatico();
         $this->setEntrada($entrada);
         $tokenAtual = [];
@@ -149,7 +155,8 @@ class AnalisadorLexico extends Token
 
         return $this;
     }
-    public function setListToken($listToken){
+    public function setListToken($listToken)
+    {
         return $this->listToken = $listToken;
     }
 
