@@ -5,8 +5,8 @@ namespace src;
 use OutOfRangeException;
 
 require_once('AnalisadorLexico.php');
-$teste = new AnalisadorSintatico();
-$teste->startTest();
+// $teste = new AnalisadorSintatico();
+// $teste->startTest();
 
 
 class AnalisadorSintatico

@@ -113,6 +113,7 @@ class AnalisadorLexico
                 if (array_key_exists($this->getEstado(), AnalisadorLexico::ESTADOS_FINAIS)) {
                     $tokenAtual = array(AnalisadorLexico::ESTADOS_FINAIS[$this->getEstado()] => $objToken->getLexema());
                     array_push($listTokens, $this->populaObjetoToken($tokenAtual, $objToken));
+                    $this->setListToken($listTokens);
                     $this->setEstado('q0');
                     $objToken = new Token();
                 } else {
@@ -173,6 +174,9 @@ class AnalisadorLexico
         return $this->listToken = $listToken;
     }
 
+    /**
+     * @return Token[]
+     */
     public function getListToken()
     {
         return $this->listToken;

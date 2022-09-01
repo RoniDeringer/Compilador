@@ -54,16 +54,13 @@ if (isset($_POST["entrada"])) {
                     <th>TOKEN</th>
                     <th>LEXEMA</th>
                 </tr>
-
                 <?php
                 foreach ($lexico->getListToken() as $token) {
-                    foreach ($token as $key => $value) {
-                        ?>
+                    ?>
                         <tr>
-                            <td><x>[ </x> <?php echo $key;  ?><x> ]</x> </td>
-                            <td><x>[ </x> <?php echo $value;?><x> ]</x> </td>
+                            <td><x>[ </x> <?php echo $token->getNome();  ?><x> ]</x> </td>
+                            <td><x>[ </x> <?php echo $token->getLexema();?><x> ]</x> </td>
                         </tr><?php
-                    }
                 }
                 ?>
             </table>
@@ -85,6 +82,6 @@ if (isset($_POST["entrada"])) {
                     <div style="color: darkred;">GRAMÁTICA NÃO ACEITA!</div>
                     <?php
             };
-} //isset 'entrada'
+}
 ?>
     </pre>
