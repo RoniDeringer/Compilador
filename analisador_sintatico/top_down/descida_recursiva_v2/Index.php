@@ -38,6 +38,7 @@ if (isset($_POST["entrada"])) {
     require_once('AnalisadorLexico.php');
     require_once('AnalisadorSintatico.php');
     $lexico = new src\AnalisadorLexico();
+    $sintatico = new src\AnalisadorSintatico();
 
     $lexico->createListToken($entrada);
     ?>
@@ -74,14 +75,19 @@ if (isset($_POST["entrada"])) {
     <!-- ANALISE SINTATICA  -->
     <pre>
            <?php
-            echo ($sintatico->start($lexico));
+                $sintatico->start($lexico);
+
+
+                /*
             if ($sintatico->start($lexico)) {
                 ?>
                     <div style="color: darkgreen;">GRAMÁTICA ACEITA!</div>
             <?php } else { ?>
                     <div style="color: darkred;">GRAMÁTICA NÃO ACEITA!</div>
                     <?php
-            };
-}
+            }
+            */
+} //setado a entrada via post
+
 ?>
     </pre>
