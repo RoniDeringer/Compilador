@@ -24,11 +24,14 @@ ___
 Dervivação (mais à esquerda)
  a cada passo: determinar a produção a ser aplicada para uma variaval
 * Analisador com descida recursiva
-  * Exige retrocesso **backtrack**
+  * Exige retrocesso **backtrack** que é a recursão, mas isso demanda muito desempenho
   * Criar um procedimento para cada varíavel até achar um terminal
-* Analisador preditivo sem recursão
-  * Analise os próximos tokens para tomar decisão
 
+* Analisador Preditivo
+    * **First** é os possíveis inicios daquele terminal
+    * Tenta prever o próximo token para prever o próximo passo
+    * Usa a mesma lógica do automato de pilha
+    * Não possui backtrack,
 
 ####  Análise Ascendente (Bottom-Up)
   * Redução
