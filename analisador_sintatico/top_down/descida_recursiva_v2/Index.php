@@ -76,7 +76,7 @@ if (isset($_POST["entrada"])) {
                 <?php
             } else {
                 ?>
-                <div style="color: darkred;">TOKENS NÃO ACEITO!</div>
+                <div style="color: darkred;">                              TOKENS NÃO ACEITO!</div>
             <?php } ?>
         </pre>
 
@@ -88,9 +88,9 @@ if (isset($_POST["entrada"])) {
 
         if ($sintatico->getIsAcceptSintatico()) {
             ?>
-                    <div style="color: darkgreen;">GRAMÁTICA ACEITA!</div>
+                    <div style="color: darkgreen;">                              GRAMÁTICA ACEITA!</div>
         <?php } else { ?>
-                    <div style="color: darkred;">GRAMÁTICA NÃO ACEITA!</div>
+                    <div style="color: darkred;">                              GRAMÁTICA NÃO ACEITA!</div>
                 <?php
         }
         ?>

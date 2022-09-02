@@ -224,10 +224,10 @@ class AnalisadorSintatico
  */
     public function imprima()
     {
-        array_push($this->listTransicaoGramatica, 'IMPRIMA         ::=     imprima NOMEVARIAVEL');
+        array_push($this->listTransicaoGramatica, 'IMPRIMA         ::=     imprima VARIAVEL');
         return
         $this->term('imprima') and
-        $this->nomeVariavel();
+        $this->variavel();
     }
 
 /**
@@ -235,13 +235,7 @@ class AnalisadorSintatico
  */
     public function variavel()
     {
-        array_push($this->listTransicaoGramatica, 'VARIAVEL        ::=     NOMEVARIAVEL = LETRAS');
-        return $this->nomeVariavel();
-
-        // return
-        // $this->nomeVariavel() and
-        // $this->term('=') and
-        // $this->letras();
+        return $this->term('VARIAVEL');
     }
 
 /**
@@ -300,9 +294,9 @@ class AnalisadorSintatico
  */
     public function param()
     {
-        array_push($this->listTransicaoGramatica, 'PARAM           ::=     NOMEVARIAVEL | CONST');
+        array_push($this->listTransicaoGramatica, 'PARAM           ::=     VARIAVEL | CONST');
         $this->setAnterior($this->getCont());
-        if ($this->nomeVariavel()) {
+        if ($this->variavel()) {
             return true;
         } else {
             $this->setCont($this->getAnterior());
@@ -317,27 +311,9 @@ class AnalisadorSintatico
     public function const()
     {
         array_push($this->listTransicaoGramatica, 'CONST           ::=     NUMEROS');
-        return $this->term('numeros');
+        return $this->term('Número');
     }
 
-/**
- * NOMEVARIAVEL ----------
- */
-    public function nomeVariavel()
-    {
-        array_push($this->listTransicaoGramatica, 'NOMEVARIAVEL    ::=     LETRAS');
-        return $this->term('VARIAVEL');
-    }
-
-
-/**
- * LETRAS ----------
- */
-    public function letras()
-    {
-        return $this->term('[a-zA-Z');
-        echo '<br>';
-    }
 
 
 

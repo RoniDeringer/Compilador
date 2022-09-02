@@ -62,17 +62,12 @@ gramatica
     LISTA_CORPO     ::=     & | CORPO | CORPO LISTA_CORPO
     CORPO           ::=     IMPRIMA | VARIAVEL | IF
     LISTA_PARAMETRO ::=     & | VARIAVEL | VARIAVEL LISTA_PARAMETRO
-    IMPRIMA         ::=     imprima NOMEVARIAVEL
+    IMPRIMA         ::=     imprima VARIAVEL
     IF              ::=     if( BLOCO )
-    VARIAVEL        ::=     NOMEVARIAVEL = LETRAS
     BLOCO           ::=     PARAM OPERADOR PARAM
     OPERADOR        ::=     > | < | == | !=
-    PARAM           ::=     NOMEVARIAVEL | CONST
+    PARAM           ::=     VARIAVEL | CONST
     CONST           ::=     NUMEROS
-    NOMEVARIAVEL    ::=     LETRAS
-
-    LETRAS          ::=     [a-zA-Z]
-    NUMEROS         ::=     [0-9]
 
 
 ## ERROS:
