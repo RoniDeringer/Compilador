@@ -22,10 +22,11 @@ hr{
     opacity: 0.23;
 }
 pre{
-    margin:2em 5em;
+    margin-top:2em;
+    margin-left: 25%;
     background-color: #444;
     padding:5px;
-    width: 50em;
+    width: 50%;
     font-size: 20px;
     color: #ecf0f1;
 }

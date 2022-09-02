@@ -1,6 +1,5 @@
 <?php
 include __DIR__ . '/css/style.php';
-echo '<h1>Análise Sintática - Descida Recursiva</h1>';
 
 ?>
 <!DOCTYPE html>
@@ -10,6 +9,7 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>descidaRecursiva</title>
+    <center><?php echo '<h1>Análise Sintática - Descida Recursiva</h1>'; ?></center>
 </head>
 <body>
 
@@ -101,7 +101,7 @@ if (isset($_POST["entrada"])) {
             foreach ($sintatico->listTransicaoGramatica as $transacao) {
                 ?>
                 <tr>
-                    <td><x>[ </x> <?php echo $transacao;  ?><x> ]</x> </td>
+    <td><x>[ </x> <?php echo $transacao;  ?><x> ]</x> </td>
                 </tr><?php
             }
             ?>
