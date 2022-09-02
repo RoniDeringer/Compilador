@@ -10,7 +10,7 @@ Esse trabalho será divido em fases, segue as fases:
 
 ________
 
-## 📌 [Analise Léxica](analisador_lexico)
+# 📌 [Analise Léxica](analisador_lexico)
 **Objetivo:** Identificar e classificar as "palavras" em uma sentença.<br>
 *Obs:* A função principal da análise léxica é criar uma lista de `tokens` que são essas palavras.<br>
 `Lexema` é uma sequência de caracteres reconhecidos por um padrão<br>
@@ -21,10 +21,10 @@ ________
   * Token: pode ser o conjunto todo também. ex: < lexema, token >
 
 ___
-## 📌 [Análise Sintática](analisador_sintatico)
+# 📌 [Análise Sintática](analisador_sintatico)
 **Objetivo:** Validar a ordem dos tokens a partir da gramática, e isso pode ser feito pelas:
 
-### 🛠️ Análise Descendente (Top-Down)
+## 🛠️ Análise Descendente (Top-Down)
 Dervivação (mais à esquerda)
  a cada passo: determinar a produção a ser aplicada para uma variaval
 
@@ -39,7 +39,7 @@ Dervivação (mais à esquerda)
     * Usa a mesma lógica do automato de pilha
     * Não possui backtrack,
 
-### 🛠️ Análise Ascendente (Bottom-Up)
+## 🛠️ Análise Ascendente (Bottom-Up)
   * Redução
   * Usa Recursão
   * +complexo e melhor desempenho
