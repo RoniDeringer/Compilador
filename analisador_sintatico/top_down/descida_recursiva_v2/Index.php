@@ -16,7 +16,15 @@ echo '<h1>Análise Sintática - Descida Recursiva</h1>';
 <!-- INTRO -->
     <pre>
         <h2>Copie e cole para teste:</h2>
-    funcao(teste){imprima teste}
+    funcao(){}
+
+
+    ARRUMAR:
+    fazer funcionar de fato = adicionar o espaço
+    front = ajustar 2 colunas
+    gramatica = remover a letras
+    adicionar as transações no array de corpo1
+    resolver recursao em listaParametro
 
     cuidar com o espaço
     </pre>
@@ -74,20 +82,31 @@ if (isset($_POST["entrada"])) {
 
     <!-- ANALISE SINTATICA  -->
     <pre>
-           <?php
+        <?php
                 $sintatico->start($lexico);
 
 
-                /*
-            if ($sintatico->start($lexico)) {
-                ?>
+        if ($sintatico->getIsAcceptSintatico()) {
+            ?>
                     <div style="color: darkgreen;">GRAMÁTICA ACEITA!</div>
-            <?php } else { ?>
+        <?php } else { ?>
                     <div style="color: darkred;">GRAMÁTICA NÃO ACEITA!</div>
-                    <?php
+                <?php
+        }
+        ?>
+    </pre>
+    <pre>
+            <h2>Listagem de transações da Gramática:</h2>
+           <?php
+            foreach ($sintatico->listTransicaoGramatica as $transacao) {
+                ?>
+                <tr>
+                    <td><x>[ </x> <?php echo $transacao;  ?><x> ]</x> </td>
+                </tr><?php
             }
-            */
+            ?>
+    </pre>
+                    <?php
 } //setado a entrada via post
 
 ?>
-    </pre>

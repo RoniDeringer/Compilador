@@ -59,9 +59,9 @@ gramatica
 
     PROGRAMA        ::=
     S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } | LISTA_CORPO
-    LISTA_CORPO     ::=     CORPO | CORPO LISTA_CORPO
+    LISTA_CORPO     ::=     & | CORPO | CORPO LISTA_CORPO
     CORPO           ::=     IMPRIMA | VARIAVEL | IF
-    LISTA_PARAMETRO ::=     VARIAVEL | VARIAVEL LISTA_PARAMETRO
+    LISTA_PARAMETRO ::=     & | VARIAVEL | VARIAVEL LISTA_PARAMETRO
     IMPRIMA         ::=     imprima NOMEVARIAVEL
     IF              ::=     if( BLOCO )
     VARIAVEL        ::=     NOMEVARIAVEL = LETRAS

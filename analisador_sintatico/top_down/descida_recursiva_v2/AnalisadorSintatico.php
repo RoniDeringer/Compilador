@@ -15,6 +15,8 @@ class AnalisadorSintatico
     private $cont = -1;
     private $anterior;
     private $newListToken = [];
+    public $listTransicaoGramatica = [];
+    private $isAcceptSintatico = false;
 
     public function start($lexico)
     {
@@ -28,7 +30,7 @@ class AnalisadorSintatico
             array_push($newListToken, $objetoToken->getNome());
         }
         $this->setNewListToken($newListToken);
-        var_dump($this->getNewListToken());
+        // var_dump($this->getNewListToken());
         $this->s();
     }
 
@@ -42,16 +44,16 @@ class AnalisadorSintatico
 
         $this->setLexico($lexico);
         $this->getLexico()->setListToken([
-                                        0 => 'FUNCAO',
-                                        1 => 'abre_parenteses',
-                                        2 => 'VARIAVEL',
-                                        3 => 'fecha_parenteses',
-                                        4 => 'abre_chave',
-                                        5 => 'imprima',
-                                        6 => 'VARIAVEL',
-                                        7 => 'fecha_chave',
-                                    ]);
-                                        //no TERM ele nao reconhece as chaves strings
+                                    0 => 'FUNCAO',
+                                    1 => 'abre_parenteses',
+                                    2 => 'VARIAVEL',
+                                    3 => 'fecha_parenteses',
+                                    4 => 'abre_chave',
+                                    5 => 'imprima',
+                                    6 => 'VARIAVEL',
+                                    7 => 'fecha_chave',
+                                ]);
+                                    //no TERM ele nao reconhece as chaves strings
         $this->s();
     }
 
@@ -70,7 +72,7 @@ class AnalisadorSintatico
     public function s()
     {
         if ($this->s1()) {
-            echo 'deu boa';
+            $this->setIsAcceptSintatico(true);
             return true;
         } else {
             $this->setCont($this->getAnterior());
@@ -80,8 +82,7 @@ class AnalisadorSintatico
 
     public function s1()
     {
-        echo 'S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } ';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'S               ::=     funcao( LISTA_PARAMETRO ){ LISTA_CORPO } ');
         return
         $this->term('FUNCAO') and
         $this->term('abre_parenteses') and
@@ -103,28 +104,35 @@ class AnalisadorSintatico
      */
     public function listaCorpo()
     {
-        echo 'LISTA_CORPO     ::=     CORPO | CORPO LISTA_CORPO';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'LISTA_CORPO     ::=     & | CORPO | CORPO LISTA_CORPO');
         if ($this->listaCorpo1()) {
             return true;
         } else {
             $this->setCont($this->getAnterior());
-            return $this->listaCorpo2();
+            if ($this->listaCorpo2()) {
+                return true;
+            } else {
+                $this->setCont($this->getAnterior());
+                return $this->listaCorpo3();
+            }
         }
     }
 
     public function listaCorpo1()
     {
-        echo 'LISTA_CORPO     ::=      CORPO';
-        echo '<br>';
-        return
-        $this->corpo();
+        return true; //corpo vazio
     }
 
     public function listaCorpo2()
     {
-        echo 'LISTA_CORPO     ::=     CORPO LISTA_CORPO';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'LISTA_CORPO     ::=      CORPO');
+        return
+        $this->corpo();
+    }
+
+    public function listaCorpo3()
+    {
+        array_push($this->listTransicaoGramatica, 'LISTA_CORPO     ::=     CORPO LISTA_CORPO');
         return
         $this->corpo() and
         $this->listaCorpo();
@@ -136,8 +144,7 @@ class AnalisadorSintatico
      */
     public function corpo()
     {
-        echo 'CORPO           ::=     IMPRIMA | VARIAVEL | IF';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'CORPO           ::=     IMPRIMA | VARIAVEL | IF');
         $this->setAnterior($this->getCont());
         if ($this->corpo1()) {
             return true;
@@ -175,47 +182,49 @@ class AnalisadorSintatico
      */
     public function listaParametro()
     {
-        echo 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO | VARIAVEL (ARRUMAR)';
-        echo '<br>';
-
+        array_push($this->listTransicaoGramatica, 'LISTA_PARAMETRO ::=     & | VARIAVEL LISTA_PARAMETRO | VARIAVEL (ARRUMAR)');
 
         $this->setAnterior($this->getCont());
-
         if ($this->listaParametro1()) {
             return true;
         } else {
             $this->setCont($this->getAnterior());
-            return $this->listaParametro2();
+            if ($this->listaParametro2()) {
+                return true;
+            } else {
+                $this->setCont($this->getAnterior());
+                return $this->listaParametro3();
+            }
         }
     }
 
     public function listaParametro1()
     {
-        echo 'LISTA_PARAMETRO ::=     | VARIAVEL';
-        echo '<br>';
+        return true;
+    }
 
+    public function listaParametro2()
+    {
+        array_push($this->listTransicaoGramatica, 'LISTA_PARAMETRO ::=     | VARIAVEL');
         return
         $this->variavel();
     }
 
 
-    public function listaParametro2()
+    public function listaParametro3()
     {
-        echo 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO');
         return
         $this->variavel() and
         $this->listaParametro();
     }
-
 
 /**
  * IMPRIMA ----------
  */
     public function imprima()
     {
-        echo 'IMPRIMA         ::=     imprima NOMEVARIAVEL';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'IMPRIMA         ::=     imprima NOMEVARIAVEL');
         return
         $this->term('imprima') and
         $this->nomeVariavel();
@@ -226,9 +235,7 @@ class AnalisadorSintatico
  */
     public function variavel()
     {
-        echo 'VARIAVEL        ::=     NOMEVARIAVEL = LETRAS';
-        echo '<br>';
-
+        array_push($this->listTransicaoGramatica, 'VARIAVEL        ::=     NOMEVARIAVEL = LETRAS');
         return $this->nomeVariavel();
 
         // return
@@ -242,8 +249,7 @@ class AnalisadorSintatico
  */
     public function if()
     {
-        echo 'IF              ::=     if( BLOCO )';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'IF              ::=     if( BLOCO )');
         return
         $this->term('if') and
         $this->bloco();
@@ -254,8 +260,7 @@ class AnalisadorSintatico
  */
     public function bloco()
     {
-        echo'BLOCO           ::=     PARAM OPERADOR PARAM';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'BLOCO           ::=     PARAM OPERADOR PARAM');
         return
         $this->param() and
         $this->operador() and
@@ -268,8 +273,7 @@ class AnalisadorSintatico
  */
     public function operador()
     {
-        echo'OPERADOR        ::=     > | < | == | !=';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'OPERADOR        ::=     > | < | == | !=');
         $this->setAnterior($this->getCont());
         if ($this->term('maior')) {
             return true;
@@ -296,8 +300,7 @@ class AnalisadorSintatico
  */
     public function param()
     {
-        echo'PARAM           ::=     NOMEVARIAVEL | CONST';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'PARAM           ::=     NOMEVARIAVEL | CONST');
         $this->setAnterior($this->getCont());
         if ($this->nomeVariavel()) {
             return true;
@@ -313,8 +316,7 @@ class AnalisadorSintatico
  */
     public function const()
     {
-        echo'CONST           ::=     NUMEROS';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'CONST           ::=     NUMEROS');
         return $this->term('numeros');
     }
 
@@ -323,8 +325,7 @@ class AnalisadorSintatico
  */
     public function nomeVariavel()
     {
-        echo 'NOMEVARIAVEL    ::=     LETRAS';
-        echo '<br>';
+        array_push($this->listTransicaoGramatica, 'NOMEVARIAVEL    ::=     LETRAS');
         return $this->term('VARIAVEL');
     }
 
@@ -350,14 +351,17 @@ class AnalisadorSintatico
     {
         return $this->lexico = $lexico;
     }
+
     public function getAnterior()
     {
         return $this->anterior;
     }
+
     public function setAnterior($anterior)
     {
         return $this->anterior = $anterior;
     }
+
     public function getCont()
     {
         return $this->cont;
@@ -369,6 +373,7 @@ class AnalisadorSintatico
 
         return $this;
     }
+
     public function getNewListToken()
     {
         return $this->newListToken;
@@ -377,5 +382,27 @@ class AnalisadorSintatico
     public function setNewListToken($newListToken)
     {
         return $this->newListToken = $newListToken;
+    }
+
+    public function getListTransicaoGramatica()
+    {
+        return $this->listTransicaoGramatica;
+    }
+
+    public function setListTransicaoGramatica($listTransicaoGramatica)
+    {
+        return $this->listTransicaoGramatica = $listTransicaoGramatica;
+    }
+
+    public function getIsAcceptSintatico()
+    {
+        return $this->isAcceptSintatico;
+    }
+
+    public function setIsAcceptSintatico($isAcceptSintatico)
+    {
+        $this->isAcceptSintatico = $isAcceptSintatico;
+
+        return $this;
     }
 }
