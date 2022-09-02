@@ -14,7 +14,7 @@ class AnalisadorSintatico
     private $lexico;
     private $cont = -1;
     private $anterior;
-
+    private $newListToken = [];
 
     public function start($lexico)
     {
@@ -27,9 +27,8 @@ class AnalisadorSintatico
         foreach ($lexico->getListToken() as $objetoToken) {
             array_push($newListToken, $objetoToken->getNome());
         }
-
-        var_dump($newListToken);
-
+        $this->setNewListToken($newListToken);
+        var_dump($this->getNewListToken());
         $this->s();
     }
 
@@ -60,7 +59,7 @@ class AnalisadorSintatico
     public function term($token)
     {
         $this->setCont($this->getCont() + 1);
-        $ret = $this->getLexico()->getListToken()[$this->getCont()] == $token;
+        $ret = $this->getNewListToken()[$this->getCont()] == $token;
         return $ret;
     }
 
@@ -349,9 +348,7 @@ class AnalisadorSintatico
 
     public function setLexico($lexico)
     {
-        $this->lexico = $lexico;
-
-        return $this;
+        return $this->lexico = $lexico;
     }
     public function getAnterior()
     {
@@ -359,9 +356,7 @@ class AnalisadorSintatico
     }
     public function setAnterior($anterior)
     {
-        $this->anterior = $anterior;
-
-        return $this;
+        return $this->anterior = $anterior;
     }
     public function getCont()
     {
@@ -373,5 +368,14 @@ class AnalisadorSintatico
         $this->cont = $cont;
 
         return $this;
+    }
+    public function getNewListToken()
+    {
+        return $this->newListToken;
+    }
+
+    public function setNewListToken($newListToken)
+    {
+        return $this->newListToken = $newListToken;
     }
 }
