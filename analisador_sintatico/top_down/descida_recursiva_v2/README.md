@@ -68,11 +68,3 @@ gramatica
     OPERADOR        ::=     > | < | == | !=
     PARAM           ::=     VARIAVEL | CONST
     CONST           ::=     NUMEROS
-
-
-## ERROS:
-
-o termminal **variavel** pois vai ter letras(?)
-**letras** é sacanagem, pode tirar esse lixo
-
-RECURSÃO NA listaCorpo e listaParametro ******

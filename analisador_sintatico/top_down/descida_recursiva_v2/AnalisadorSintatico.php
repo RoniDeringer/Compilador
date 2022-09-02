@@ -198,25 +198,27 @@ class AnalisadorSintatico
         }
     }
 
+
+
     public function listaParametro1()
     {
-        return true;
-    }
-
-    public function listaParametro2()
-    {
-        array_push($this->listTransicaoGramatica, 'LISTA_PARAMETRO ::=     | VARIAVEL');
+        array_push($this->listTransicaoGramatica, 'LISTA_PARAMETRO ::=     VARIAVEL');
         return
         $this->variavel();
     }
 
-
-    public function listaParametro3()
+    public function listaParametro2()
     {
         array_push($this->listTransicaoGramatica, 'LISTA_PARAMETRO ::=     VARIAVEL LISTA_PARAMETRO');
         return
         $this->variavel() and
         $this->listaParametro();
+    }
+
+    public function listaParametro3()
+    {
+        array_push($this->listTransicaoGramatica, 'LISTA_PARAMETRO ::=     &');
+        return $this->transicaoVazia();
     }
 
 /**
@@ -228,6 +230,14 @@ class AnalisadorSintatico
         return
         $this->term('imprima') and
         $this->variavel();
+    }
+
+/**
+ * TRANSIÇÃO VAZIA ----------
+ */
+    public function transicaoVazia()
+    {
+        return true;
     }
 
 /**

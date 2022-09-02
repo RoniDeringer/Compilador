@@ -16,17 +16,12 @@ include __DIR__ . '/css/style.php';
 <!-- INTRO -->
     <pre>
         <h2>Copie e cole para teste:</h2>
-    funcao(){}
+    funcao(){}<br>
+    funcao(variavel){}<br>
+    funcao(variavel){}<br>
 
 
-    ARRUMAR:
-    fazer funcionar de fato = adicionar o espaço
-    front = ajustar 2 colunas
-    gramatica = remover a letras
-    adicionar as transações no array de corpo1
-    resolver recursao em listaParametro
-
-    cuidar com o espaço
+    não ta aceitando quebras de linha 😞
     </pre>
 
     <!-- FORMULARIO -->
