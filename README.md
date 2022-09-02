@@ -4,7 +4,7 @@ Professora orientadora: Marcela Leite.
 
 Esse trabalho será divido em fases, segue as fases:
 
-><img src="img/fases_compilador.png" width="500" text-align="center" height="350">
+<img src="img/fases_compilador.png" width="500" text-align="center" height="350">
 
 ________
 
@@ -32,6 +32,7 @@ Dervivação (mais à esquerda)
 
 * 🏆 [Analisador Preditivo](analisador_sintatico/top_down/analisador_preditivo/)
     * **First** é os possíveis inicios daquele terminal
+    * **Follow** são as proxímas produções do proxímo terminal
     * Tenta prever o próximo token para prever o próximo passo
     * Usa a mesma lógica do automato de pilha
     * Não possui backtrack,
