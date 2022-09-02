@@ -1,10 +1,12 @@
 # 🚀 Compilador
-Trabalho realizado na disciplina de Compiladores no curso de Ciências da computação.
+Trabalho realizado na disciplina de Compiladores no curso **Ciências da computação.**<br>
 Professora orientadora: Marcela Leite.
 
 Esse trabalho será divido em fases, segue as fases:
-![Segue os indices:](img/fases_compilador.png)
 
+<center><img src="img/fases_compilador.png" width="500" height="350"> </center>
+
+________
 
 ## 📌 [Analise Léxica](analisador_lexico)
 **Objetivo:** Identificar e classificar as "palavras" em uma sentença.<br>
@@ -17,31 +19,33 @@ Esse trabalho será divido em fases, segue as fases:
   * Token: pode ser o conjunto todo também. ex: < lexema, token >
 
 ___
-## 📌 Análise Sintática
+## 📌 [Análise Sintática](analisador_sintatico)
 **Objetivo:** Validar a ordem dos tokens a partir da gramática, e isso pode ser feito pelas:
 
-#### Análise Descendente [(Top-Down)](/analisador_sintatico/top_down)
+### 🛠️ Análise Descendente (Top-Down)
 Dervivação (mais à esquerda)
  a cada passo: determinar a produção a ser aplicada para uma variaval
-* Analisador com descida recursiva
+
+* 🏆[Analisador com descida recursiva](analisador_sintatico/top_down/descida_recursiva_v2/)
   * Exige retrocesso **backtrack** que é a recursão, mas isso demanda muito desempenho
   * Criar um procedimento para cada varíavel até achar um terminal
 
-* Analisador Preditivo
+* 🏆 [Analisador Preditivo](analisador_sintatico/top_down/analisador_preditivo/)
     * **First** é os possíveis inicios daquele terminal
     * Tenta prever o próximo token para prever o próximo passo
     * Usa a mesma lógica do automato de pilha
     * Não possui backtrack,
 
-####  Análise Ascendente (Bottom-Up)
+### 🛠️ Análise Ascendente (Bottom-Up)
   * Redução
   * Usa Recursão
   * +complexo e melhor desempenho
 
-
 Forma de Backus-Naur ou **BNF** `::=`
+___________
+<details>
 
-
+<summary> Outros Analisadores:</summary>
 <br>
 <br>
 
@@ -54,4 +58,8 @@ Forma de Backus-Naur ou **BNF** `::=`
 #### 📌 Otimizador de código
 
 #### 📌 Gerador de código objeto
+
+
+</details>
+
 
