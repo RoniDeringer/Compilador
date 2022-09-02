@@ -4,7 +4,9 @@ Professora orientadora: Marcela Leite.
 
 Esse trabalho será divido em fases, segue as fases:
 
-<img src="img/fases_compilador.png" width="500" text-align="center" height="350">
+<p align="center">
+<img src="img/fases_compilador.png" width="650" text-align="center" height="450">
+</p>
 
 ________
 
