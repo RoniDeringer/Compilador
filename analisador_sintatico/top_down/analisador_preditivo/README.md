@@ -20,7 +20,6 @@ _Determina o próximo terminal da produção atual_<br>
 Eu avalio a produção que vem imediatamente depois do terminal que estou avaliando<br>
 Obs: Se a próxima produção for vazia eu avalio a outra próxima produção
 
-
     Follow(S) = {$}
     Follow(B) = {$}
     Follow(C) = {$}
