@@ -31,6 +31,7 @@ Dervivação (mais à esquerda)
 * 🏆[Analisador com descida recursiva](analisador_sintatico/top_down/descida_recursiva_v2/)
   * Exige retrocesso **backtrack** que é a recursão, mas isso demanda muito desempenho
   * Criar um procedimento para cada varíavel até achar um terminal
+  * Não possui **backtrack**
 
 * 🏆 [Analisador Preditivo](analisador_sintatico/top_down/analisador_preditivo/)
     * **First** é os possíveis inicios daquele terminal
