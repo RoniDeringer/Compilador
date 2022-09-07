@@ -65,38 +65,3 @@ ___________
 
 
 </details>
-
-<br><br><br>
-
-# 06/09/2022
-
-## 📌 O que eu fiz Ontem
-
-### Histórico de fechamento do magapay
-* Ajustei o fluxo do cancelamento, pois antes a NF estava sendo cancelada mas não estava sendo desvinculada
-* Agora segue como o comportamento esperado, desvinculando a NF
-* Desenvolvi o formulário de visualização do histórico
-* Daniel validou meu código e solicitou alguns ajustes, como a criação do formulário e melhoria das boas práticas de programação para melhorar a visualização do código;
-* Finalizei a atividade e enviei a migration para o Sasse conferir (Final do dia ele deu um Ok e disse que o magatec é um sistema isolado e não vai impactar na atualização)
-* Enviei também pra Leticia o *Pull request*
-
-### Monitor - Repositórios do app
-* Becker tinha solicitado alguns ajustes:
-    * Ajustar o cabeçalho da listagem de clientes, no qual eu inclui um titulo para as ações *Editar, Ver WebSite, Repositórios de app e Serviços*
-    * Também ajustei a identificador do endpoint de cadastro, o ajuste foi:
-        * De: `\cliente\{id}\repository\{repo_name}`
-        * Para: `\cliente\{id}\repository`
-* Também adicionei uma validação no campo de versão para aceitar somente números, já que antes antes apenas aparecia uma mensagem direto do banco e não era entendível para o usuário de o porquê está estourando o erro
-* Finalizei e enviei em feedback pro Becker
-
-## 📌 O que vou fazer hoje
-
-### Relatório de NF por loja
-* Essa atividade eu já fiz ela a 1 mes e meio atrás, onde que eu inclui duas colunas: **Valor de Imposto** e **Valor outros**
-* Porém a dificuldade dessa atividade é conseguir testar, já que só é possível testar em produção, sendo assim, necessitando vários ajustes;
-* O ajuste atual é colocar o subTotal de **Valor Outros** negativo;
-* Porém o Mateus(QA) não me explicou o porquê, Então hoje vou ver certinho a RN por trás disso
-
-
-## 📌 Dificuldades
-* Nada que impactou severamente no andamento das atividades
