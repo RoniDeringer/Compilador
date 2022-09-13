@@ -25,13 +25,15 @@ ___
 **Objetivo:** Validar a ordem dos tokens a partir da gramática, e isso pode ser feito pelas:
 
 ## 🛠️ Análise Descendente (Top-Down)
-Dervivação (mais à esquerda)
- a cada passo: determinar a produção a ser aplicada para uma variaval
+**Dervivação** (mais à esquerda)
+ a cada passo: determinar a produção a ser aplicada para uma variaval<br>
+ Usa LL
 
 * 🏆[Analisador com descida recursiva](analisador_sintatico/top_down/descida_recursiva_v2/)
   * Exige retrocesso **backtrack** que é a recursão, mas isso demanda muito desempenho
   * Criar um procedimento para cada varíavel até achar um terminal
-  * Não possui **backtrack**
+  * Usa **LL** (não posso ter duas produções que começam iguais)
+
 
 * 🏆 [Analisador Preditivo](analisador_sintatico/top_down/analisador_preditivo/)
     * **First** é os possíveis inicios daquele terminal
@@ -39,11 +41,20 @@ Dervivação (mais à esquerda)
     * Tenta prever o próximo token para prever o próximo passo
     * Usa a mesma lógica do automato de pilha
     * Não possui backtrack,
+    * melhor que o recursivo
+    * **LL(1)** pois olha a próxima produção
+
 
 ## 🛠️ Análise Ascendente (Bottom-Up)
-  * Redução
-  * Usa Recursão
-  * +complexo e melhor desempenho
+Mais utilizado e mais otimizado <br>
+**Redução** | Usa **LR** Derivação mais a direita
+<br>
+* 🏆[SLR](analisador_sintatico/top_down/descida_recursiva_v2/)
+  * **SLR** = *(Simple LR)* Analisador simples de linguagem LR
+  * Usar uma pilha pra empilhar os terminais
+  * Quando conseguir "casar" com uma produção eu empilho uma variável
+
+
 
 Forma de Backus-Naur ou **BNF** `::=`
 ___________
