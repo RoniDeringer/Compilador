@@ -1,0 +1,16 @@
+topo_pilha = $
+le primeiro token em X
+empilha simbolo inicial FUN
+while (x =! $){
+    if(topo_pilha é terminal){
+        if(topo == x){
+            desemepilha();
+            x = nextToken()
+        }senao erro
+    }senao{
+        busca producao tabelaM
+        producao = M[topo,X]
+        desemepilha topo
+        empilha producao
+    }
+}

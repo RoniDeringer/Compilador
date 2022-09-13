@@ -1,6 +1,7 @@
 # 🖥️ Analisador Sintático - Analisador Preditivo
 
-**LL** = analisa a próxima produção
+**LL** = analisa a próxima produção<br>
+Utiliza a **Pilha** para as produções
 
 ## ⚡ Gramática:
 
@@ -91,6 +92,5 @@ Obs: Se a próxima produção for vazia eu avalio a outra próxima produção
 
 **Tabela de transição** - Tabela M
 
-<p align="center">
 <img src="img/tabela_m.PNG" width="630" text-align="center" height="200">
-</p>
+
