@@ -51,7 +51,7 @@ Mais utilizado e mais eficiente <br>
 <br>
 
 * 🏆[SLR](analisador_sintatico/top_down/descida_recursiva_v2/)
-  * **SLR** = *(Simple LR)* Analisador simples de linguagem LR
+  * *Shift-Reduce* ou **SLR** = *(Simple LR)* Analisador simples de linguagem LR
   * Usar uma pilha pra empilhar os terminais
   * Quando conseguir "casar" com uma produção eu empilho uma variável
   * GOTO = Tabela de ação de transição para as produções
