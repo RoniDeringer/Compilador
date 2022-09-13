@@ -37,10 +37,10 @@ class AnalisadorPreditivo
     public $pilha = ['$'];
     public $listTokens = [];
 
-    public function __construct($lexico, $tokens)
+    public function __construct($lexico)
     {
         $this->lexico = $lexico;
-        $this->listTokens = $tokens;
+        $this->listTokens = $lexico->getListToken();
     }
 
     public function validaPreditivo()

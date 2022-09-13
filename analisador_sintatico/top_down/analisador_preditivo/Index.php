@@ -8,8 +8,8 @@ include __DIR__ . '/css/style.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>descidaRecursiva</title>
-    <center><?php echo '<h1>Análise Sintática - Descida Recursiva</h1>'; ?></center>
+    <title>Preditivo</title>
+    <center><?php echo '<h1>Analisador Preditivo</h1>'; ?></center>
 </head>
 <body>
 
@@ -39,9 +39,8 @@ if (isset($_POST["entrada"])) {
     $entrada = $_POST["entrada"];
 
     require_once('AnalisadorLexico.php');
-    require_once('AnalisadorSintatico.php');
+    require_once('AnalisadorPreditivo.php.php');
     $lexico = new src\AnalisadorLexico();
-    $sintatico = new src\AnalisadorSintatico();
 
     $lexico->createListToken($entrada);
     ?>
@@ -75,32 +74,7 @@ if (isset($_POST["entrada"])) {
             <?php } ?>
         </pre>
 
-    <!-- ANALISE SINTATICA  -->
-    <pre>
-        <?php
-                $sintatico->start($lexico);
-
-
-        if ($sintatico->getIsAcceptSintatico()) {
-            ?>
-                    <div style="color: darkgreen;">                              GRAMÁTICA ACEITA!</div>
-        <?php } else { ?>
-                    <div style="color: darkred;">                              GRAMÁTICA NÃO ACEITA!</div>
-                <?php
-        }
-        ?>
-    </pre>
-    <pre>
-            <h2>Listagem de transações da Gramática:</h2>
-           <?php
-            foreach ($sintatico->listTransicaoGramatica as $transacao) {
-                ?>
-                <tr>
-    <td><x>[ </x> <?php echo $transacao;  ?><x> ]</x> </td>
-                </tr><?php
-            }
-            ?>
-    </pre>
+    <!-- ANALISE PREDITIVA  -->
                     <?php
 } //setado a entrada via post
 
