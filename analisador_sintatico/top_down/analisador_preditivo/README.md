@@ -56,7 +56,7 @@ $ | $ | Acc
 ____
 ## ⚡ Outro exemplo:
 
-    FUN         ::=     fun (LISTAVAR){BLOCO}
+    FUN         ::=     funcao (LISTAVAR){BLOCO}
     LISTAVAR    ::=     VAR LISTAVAR | &
     VAR         ::=     id | const
     BLOCO       ::=     ATRIB | DECLARACAO
