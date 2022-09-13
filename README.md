@@ -24,7 +24,7 @@ ___
 # 📌 [Análise Sintática](analisador_sintatico)
 **Objetivo:** Validar a ordem dos tokens a partir da gramática, e isso pode ser feito pelas:
 
-## 🛠️ Análise Descendente (Top-Down)
+## 🛠️ Análise Descendente *(Top-Down)*
 **Dervivação** (mais à esquerda)
  a cada passo: determinar a produção a ser aplicada para uma variaval<br>
  Usa LL
@@ -45,14 +45,17 @@ ___
     * **LL(1)** pois olha a próxima produção
 
 
-## 🛠️ Análise Ascendente (Bottom-Up)
-Mais utilizado e mais otimizado <br>
+## 🛠️ Análise Ascendente *(Bottom-Up)*
+Mais utilizado e mais eficiente <br>
 **Redução** | Usa **LR** Derivação mais a direita
 <br>
+
 * 🏆[SLR](analisador_sintatico/top_down/descida_recursiva_v2/)
   * **SLR** = *(Simple LR)* Analisador simples de linguagem LR
   * Usar uma pilha pra empilhar os terminais
   * Quando conseguir "casar" com uma produção eu empilho uma variável
+  * GOTO = Tabela de ação de transição para as produções
+  * Ação = Tabela de ação
 
 
 
