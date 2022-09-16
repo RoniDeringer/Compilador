@@ -24,6 +24,11 @@ ___
 # 📌 [Análise Sintática](analisador_sintatico)
 **Objetivo:** Validar a ordem dos tokens a partir da gramática, e isso pode ser feito pelas:
 
+`GLC >> LR >> LR`
+
+**LL** = 
+
+
 ## 🛠️ Análise Descendente *(Top-Down)*
 **Dervivação** (mais à esquerda)
  a cada passo: determinar a produção a ser aplicada para uma variaval<br>
@@ -44,21 +49,26 @@ ___
     * melhor que o recursivo
     * **LL(1)** pois olha a próxima produção
 
+<br><br>
 
 ## 🛠️ Análise Ascendente *(Bottom-Up)*
+Também conhecido como: **shift-reduce** ou _transferir e reduzir_<br>
 Mais utilizado e mais eficiente <br>
 **Redução** | Usa **LR** Derivação mais a direita
 <br>
+`handle` um conceito da idéia que escolhe _empilhar_ ou _desempilhar_<br>
+Desvio representa a redução (GOTO)
+
 
 * 🏆[SLR](analisador_sintatico/top_down/descida_recursiva_v2/)
-  * *Shift-Reduce* ou **SLR** = *(Simple LR)* Analisador simples de linguagem LR
+  * **SLR** = *(Simple LR)* Analisador simples de linguagem LR
   * Usar uma pilha pra empilhar os terminais
   * Quando conseguir "casar" com uma produção eu empilho uma variável
   * GOTO = Tabela de ação de transição para as produções
   * Ação = Tabela de ação
 
 
-
+<br><br>
 Forma de Backus-Naur ou **BNF** `::=`
 ___________
 <details>
