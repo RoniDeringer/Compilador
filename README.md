@@ -64,8 +64,8 @@ Desvio representa a redução (GOTO)
   * **SLR** = *(Simple LR)* Analisador simples de linguagem LR
   * Usar uma pilha pra empilhar os terminais
   * Quando conseguir "casar" com uma produção eu empilho uma variável
-  * GOTO = Tabela de ação de transição para as produções
-  * Ação = Tabela de ação
+  * GOTO = Tabela de desvios para as produções
+  * Ação = Tabela de ação informando as próximas produções
 
 
 <br><br>
@@ -76,8 +76,6 @@ ___________
 <summary> Outros Analisadores:</summary>
 <br>
 <br>
-
-#### 📌 Análise Sintática
 
 #### 📌 Análise Semântica
 

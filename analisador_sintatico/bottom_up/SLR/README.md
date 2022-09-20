@@ -1,16 +1,23 @@
 # 🖥️ Analisador SLR
 
+Shift: Empilhar <br>
+Empilho o número dos estados até encontrar o **reduce**
+
+
+Reduce: Redução<br>
+Quando encontra uma produção que consigo trocar
+
+GOTO: Desvio<br>
+Informa qual estado deve ser feito o desvio para fazer a **redução**
+
+#: <br>
+
+
+
 ## ⚒️ O que precisa ser feito:
-Fazer um analisador Sintático que aceite:
-
-    funcao nome (variavel){
-        tipo variavel = valor
-        if(valor > numero){
-            imprime (valor)
-        }
-    }
-    chama nome()
-
+.
+.
+.
 
 ## 📌 Dicas:
 
@@ -24,7 +31,7 @@ LR RIGHT -> RIGHT  derivação mais a direita
 * mostrar todas as possibilidades até achar um terminal
 
 ### AÇÃO
-* utiliza o conceito de follows e firts
+* utiliza o conceito de follows e first
 * reduz sempre nos follows
 * shift _S_
 * redução _R_
@@ -32,10 +39,8 @@ LR RIGHT -> RIGHT  derivação mais a direita
 
 
 
-### GOTO
+### GOTO ou Desvio
 * mostra para qual estado desviar para indicar a redução
-* 
-
 
 ### PILHA
 
@@ -55,8 +60,4 @@ obs: reduz e desvio não avação os estados
     <ATR>           ::=     ID ATRIBUICAO <VAR>
     <VAR>           ::=     ID | CONST
     <SEL_IF>        ::=     IF ABRE_PAR ID COMPARA ID FECHA_PAR ABRE_BLOCO <BLOCO> FECHA_BLOCO
-
-
-## ⚡ Ação:
-
 
