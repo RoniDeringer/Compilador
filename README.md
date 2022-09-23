@@ -26,7 +26,7 @@ ___
 
 `GLC >> LR >> LR`
 
-**LL** = 
+**LL** =
 
 
 ## 🛠️ Análise Descendente *(Top-Down)*
@@ -60,7 +60,7 @@ Mais utilizado e mais eficiente <br>
 Desvio representa a redução (GOTO)
 
 
-* 🏆[SLR](analisador_sintatico/top_down/descida_recursiva_v2/)
+* 🏆[SLR](analisador_sintatico/bottom_up/SLR/)
   * **SLR** = *(Simple LR)* Analisador simples de linguagem LR
   * Usar uma pilha pra empilhar os terminais
   * Quando conseguir "casar" com uma produção eu empilho uma variável
