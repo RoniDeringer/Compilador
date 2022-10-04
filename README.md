@@ -23,10 +23,10 @@ ________
 ___
 # 📌 [Análise Sintática](analisador_sintatico)
 **Objetivo:** Validar a ordem dos tokens a partir da gramática, e isso pode ser feito pelas:
+<br>`GLC >> LR >> LR`<br>
+* Árvore de análise sintática (código intermediário e código final)
+* Tabela de símbolos (ajuda a gerar o código final)
 
-`GLC >> LR >> LR`
-
-**LL** =
 
 
 ## 🛠️ Análise Descendente *(Top-Down)*
@@ -70,6 +70,15 @@ Desvio representa a redução (GOTO)
 
 <br><br>
 Forma de Backus-Naur ou **BNF** `::=`
+____
+
+# 📌 [Análise Semântica](analisador_sintatico)
+
+* Verificação de tipos
+* Verifica se a variável foi declarada
+* verifica tbm questão de escopo
+
+
 ___________
 <details>
 
@@ -77,7 +86,6 @@ ___________
 <br>
 <br>
 
-#### 📌 Análise Semântica
 
 #### 📌 Gerador de código Intermediário
 
