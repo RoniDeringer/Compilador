@@ -68,3 +68,8 @@ gramatica
     OPERADOR        ::=     > | < | == | !=
     PARAM           ::=     VARIAVEL | CONST
     CONST           ::=     NUMEROS
+
+    s' -> . s
+0    .funcao( LISTA_PARAMETRO ){ LISTA_CORPO }
+
+1 acc
