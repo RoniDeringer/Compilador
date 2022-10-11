@@ -5,7 +5,8 @@ namespace src;
 /**
  * @author Roni Deringer
  */
-class Token
+
+ class Token
 {
     private $nome = '';
 
