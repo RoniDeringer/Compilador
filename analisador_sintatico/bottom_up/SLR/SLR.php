@@ -45,7 +45,7 @@ require_once('AnalisadorLexico.php');
 // $teste->startTest();
 
 
-class SRC
+class SRL
 {
     private $matrizSLR = [
         0 => ['DEC' => 'S2'],
@@ -70,6 +70,17 @@ class SRC
         19  => ['PV' => 'R1'],
         20 => ['PV' => 'R1'],
         21 => ['ID' => 'R4'],
+
+        /**
+         * olhar o video e pegar como exemplo
+         *
+         * tem a ferramente gals e ver como é gerado as tabelas la
+         *
+         * o retorno do front é validar só se é aceito ou nao
+         *
+         *
+         *
+         */
 
     ];
     }

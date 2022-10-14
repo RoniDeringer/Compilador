@@ -39,9 +39,9 @@ if (isset($_POST["entrada"])) {
     $entrada = $_POST["entrada"];
 
     require_once('AnalisadorLexico.php');
-    require_once('AnalisadorSintatico.php');
+    require_once('SLR.php');
     $lexico = new src\AnalisadorLexico();
-    $sintatico = new src\AnalisadorSintatico();
+    $slr = new src\SRL();
 
     $lexico->createListToken($entrada);
     ?>
@@ -75,7 +75,7 @@ if (isset($_POST["entrada"])) {
             <?php } ?>
         </pre>
 
-    <!-- ANALISE SINTATICA  -->
+    <!-- SLR  -->
     <pre>
         <?php
                 $sintatico->start($lexico);
@@ -90,17 +90,7 @@ if (isset($_POST["entrada"])) {
         }
         ?>
     </pre>
-    <pre>
-            <h2>Listagem de transações da Gramática:</h2>
-           <?php
-            foreach ($sintatico->listTransicaoGramatica as $transacao) {
-                ?>
-                <tr>
-    <td><x>[ </x> <?php echo $transacao;  ?><x> ]</x> </td>
-                </tr><?php
-            }
-            ?>
-    </pre>
+
                     <?php
 } //setado a entrada via post
 
