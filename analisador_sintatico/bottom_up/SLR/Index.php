@@ -78,16 +78,8 @@ if (isset($_POST["entrada"])) {
     <!-- SLR  -->
     <pre>
         <?php
-                $sintatico->start($lexico);
+            echo ($slr->start($lexico->getListToken()));
 
-
-        if ($sintatico->getIsAcceptSintatico()) {
-            ?>
-                    <div style="color: darkgreen;">                              GRAMÁTICA ACEITA!</div>
-        <?php } else { ?>
-                    <div style="color: darkred;">                              GRAMÁTICA NÃO ACEITA!</div>
-                <?php
-        }
         ?>
     </pre>
 
